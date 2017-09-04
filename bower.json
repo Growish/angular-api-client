@@ -1,0 +1,10 @@
+{
+  "name": "angular-api-client",
+  "homepage": "https://github.com/Growish/angular-api-client",
+  "authors": [
+    "domingo <domingo.lupo@growish.com>"
+  ],
+  "description": "The Growish API Angular client",
+  "main": "",
+  "license": "MIT"
+}
