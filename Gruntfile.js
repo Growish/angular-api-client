@@ -1,6 +1,5 @@
 module.exports = function(grunt) {
 
-
     grunt.initConfig({
         ngAnnotate: {
             options: {
@@ -59,8 +58,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-add-comment');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-
     grunt.registerTask('default', ['ngAnnotate', 'uglify', 'add_comment']);
-    //grunt.registerTask('watch', ['watch']);
 
 };
