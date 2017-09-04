@@ -1,4 +1,4 @@
-// Compiled Mon Sep 04 2017 14:54:38 GMT+0200 (CEST)
+// Compiled Mon Sep 04 2017 17:30:55 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -70,20 +70,60 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     var methods = new MethodCollection();
 
+
+    //http://growish.github.io/api-doc/#api-Authorization-authorization
     methods.add('auth', '/auth/');
+
+    //http://growish.github.io/api-doc/#api-User-getUser
+    //http://growish.github.io/api-doc/#api-User-updateUser
     methods.add('user', '/user/{0}/');
+
+    //http://growish.github.io/api-doc/#api-User-newUser
     methods.add('newUser', '/user/');
-    methods.add('newListWallet', '/list/');
-    methods.add('wallet', '/wallet/{0}/');
+
+    //http://growish.github.io/api-doc/#api-User-wallets
     methods.add('wallets', '/user/{0}/wallet/');
+
+
+    methods.add('newListWallet', '/list/');
+
+    //http://growish.github.io/api-doc/#api-Wallet-getWallet
+    //http://growish.github.io/api-doc/#api-Wallet-updateWallet
+    methods.add('wallet', '/wallet/{0}/');
+
+    //http://growish.github.io/api-doc/#api-Wallet-newWallet
     methods.add('newWallet', '/wallet/');
+
     methods.add('list.product', '/list/{0}/product/{1}/');
-    methods.add('user.list', '/user/{0}/list/{1}/');
-    methods.add('user.addressBook', '/user/{0}/address_book/');
-    methods.add('user.creditCard', '/user/{0}/credit_card/');
-    methods.add('user.publicCollection', '/user/{0}/public_collection/');
+
+    //http://growish.github.io/api-doc/#api-User-deleteContact
+    //http://growish.github.io/api-doc/#api-User-newAddressBook
+    //http://growish.github.io/api-doc/#api-User-getAddressBook
+    methods.add('user.addressBook', '/user/{0}/address-book/');
+
+    //http://growish.github.io/api-doc/#api-User-updateCreditCard
+    //http://growish.github.io/api-doc/#api-User-newCreditCard
+    //http://growish.github.io/api-doc/#api-User-user_creditCard
+    methods.add('user.creditCard', '/user/{0}/credit-card/');
+
+    //http://growish.github.io/api-doc/#api-User-newCommonFund
+    //http://growish.github.io/api-doc/#api-User-deleteCommonFund
+    //http://growish.github.io/api-doc/#api-User-getCommonFund
+    //http://growish.github.io/api-doc/#api-User-editCommonFund
+    methods.add('user.commonFund', '/user/{0}/common-fund/');
+
+    //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');
+
+    //http://growish.github.io/api-doc/#api-List-ImportContacts
     methods.add('list.guests', '/list/{0}/guests/');
+
+    //http://growish.github.io/api-doc/#api-User-shareAddressBook
+    methods.add('user.addressBookShare', '/user/{0}/address-book-share/');
+
+    methods.add('restorePassword', '/passwordrecovery/');
+
+
 
     var RequestClass = function (method, args) {
 
