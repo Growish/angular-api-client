@@ -1,4 +1,4 @@
-// Compiled Mon Sep 04 2017 17:30:55 GMT+0200 (CEST)
+// Compiled Tue Sep 05 2017 17:32:19 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -254,6 +254,16 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
         return deferred.promise;
 
+    };
+
+
+    this.updateSession = function (user) {
+        session.firstName = user.firstName;
+        session.lastName = user.lastName;
+        session.birthday = user.birthday;
+        session.taxCode = user.taxCode;
+
+        localStorage.setItem(config.localStorageFile, angular.toJson(session));
     };
 
     this.setSession = function (user) {
