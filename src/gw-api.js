@@ -255,6 +255,16 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     };
 
+
+    this.updateSession = function (user) {
+        session.firstName = user.firstName;
+        session.lastName = user.lastName;
+        session.birthday = user.birthday;
+        session.taxCode = user.taxCode;
+
+        localStorage.setItem(config.localStorageFile, angular.toJson(session));
+    };
+
     this.setSession = function (user) {
         session = user;
         localStorage.setItem(config.localStorageFile, angular.toJson(user));
