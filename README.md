@@ -5,6 +5,12 @@ An API Angular client for the Growish rest API [http://growish.github.io/api-doc
 #### HOW TO USE IT
 Include in your project ````/dist/gw-api.min.js````
 
+**RECOMMENDED**
+
+````
+bower install https://github.com/Growish/angular-api-client.git
+````
+
 Inject the module dependency *gwApiClient* in your angular app
 ````
 angular.module('demo', ['gwApiClient']).
