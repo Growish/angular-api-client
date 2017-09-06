@@ -271,7 +271,10 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         localStorage.setItem(config.localStorageFile, angular.toJson(user));
     };
 
-    this.session = function () {
+    this.session = function (i) {
+        if (typeof i !== "undefined" && i) {
+            return session;
+        }
         var deferred = $q.defer();
 
         if (session) {
