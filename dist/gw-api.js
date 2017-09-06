@@ -1,4 +1,4 @@
-// Compiled Wed Sep 06 2017 14:43:17 GMT+0200 (CEST)
+// Compiled Wed Sep 06 2017 15:00:34 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -84,6 +84,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     //http://growish.github.io/api-doc/#api-User-wallets
     methods.add('wallets', '/user/{0}/wallet/');
 
+    methods.add('listWallets', '/user/{0}/list/');
 
     methods.add('newListWallet', '/list/');
 

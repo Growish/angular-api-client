@@ -63,7 +63,7 @@
             padding: 20px 0;
         }
         .loader {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
@@ -98,12 +98,6 @@
 
 <div class="wrapper">
 
-    <div class="block">
-        <h4>User session:</h4>
-        <pre>{{session}}</pre>
-        <button ng-if="session.id" class="btn btn-lg btn-primary btn-block" type="button" ng-click="logoutUser()">Logout</button>
-    </div>
-
     <form class="form-signin block">
         <h4 class="form-signin-heading">Login DEMO</h4>
         <input type="text" class="form-control" name="email" ng-model="loginForm.email" placeholder="Email Address" required="" autofocus=""/>
@@ -114,6 +108,25 @@
         <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="loginUser()">Login</button>
     </form>
 
+
+    <div class="block">
+        <h4>User session:</h4>
+        <pre>{{session}}</pre>
+        <button ng-if="session.id" class="btn btn-lg btn-primary btn-block" type="button" ng-click="logoutUser()">Logout</button>
+    </div>
+
+    <div class="block">
+        <h4>User:</h4>
+        <pre>{{user}}</pre>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getUser()">pull</button>
+    </div>
+
+    <div class="block">
+        <h4>User list wallets:</h4>
+        <pre>{{userListWallts}}</pre>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getListWallets()">pull</button>
+    </div>
+
 </div>
 
 <script type="application/javascript">
@@ -121,7 +134,7 @@
 
         gwApi.initialize({
             appKey: '1234567890',
-            error401: function (response) {
+            error401: function () {
                 alert("Token missing or invalid, you should ask the user to login again");
             },
             error403: function (response) {
@@ -152,10 +165,10 @@
             $scope.loginForm.errors = {};
             $scope.loader = true;
             gwApi.authenticate($scope.loginForm.email, $scope.loginForm.password).then(
-                function success(user) {
+                function success(session) {
                     $scope.loader = false;
-                    gwApi.setSession(user);
-                    $scope.session = user;
+                    gwApi.setSession(session);
+                    $scope.session = session;
                 },
                 function error(err) {
                     $scope.loader = false;
@@ -178,7 +191,43 @@
             );
         };
 
-        //gwApi.request('user', '53b157b19a6b51c4048b4572').read();
+        $scope.getUser = function () {
+
+            $scope.loader = true;
+            gwApi.session().then(
+                function success(session) {
+                    return gwApi.request('user', session.id).read();
+                }
+            ).then(
+                function success(user) {
+                    $scope.user = user;
+                    $scope.loader = false;
+                }
+            ).catch(function () {
+                $scope.loader = false;
+            })
+
+        };
+
+        $scope.getListWallets = function () {
+
+            $scope.loader = true;
+            gwApi.session().then(
+                function success(session) {
+                    return gwApi.request('listWallets', session.id).read();
+                }
+            ).then(
+                function success(userListWallts) {
+                    $scope.userListWallts = userListWallts;
+                    $scope.loader = false;
+                }
+            ).catch(function () {
+                $scope.loader = false;
+            })
+
+        };
+
+
 
     });
 </script>
