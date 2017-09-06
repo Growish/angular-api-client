@@ -1,4 +1,4 @@
-// Compiled Wed Sep 06 2017 14:40:41 GMT+0200 (CEST)
+// Compiled Wed Sep 06 2017 14:43:17 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -257,27 +257,14 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     };
 
 
-    // this.updateSession = function (user) {
-    //     session.firstName = user.firstName;
-    //     session.lastName = user.lastName;
-    //     session.birthday = user.birthday;
-    //     session.taxCode = user.taxCode;
-    //
-    //     localStorage.setItem(config.localStorageFile, angular.toJson(session));
-    // };
-    //
-    this.updateSession = function (newUser) {
-        var user = this.session();
-        session.firstName = newUser.firstName;
-        session.lastName = newUser.lastName;
-        session.birthday = newUser.birthday;
-        session.taxCode = newUser.taxCode;
+    this.updateSession = function (user) {
+        session.firstName = user.firstName;
+        session.lastName = user.lastName;
+        session.birthday = user.birthday;
+        session.taxCode = user.taxCode;
 
-        // localStorage.setItem(config.localStorageFile, angular.toJson(session));
-        this.setSession(user);
-
+        localStorage.setItem(config.localStorageFile, angular.toJson(session));
     };
-
 
     this.setSession = function (user) {
         session = user;

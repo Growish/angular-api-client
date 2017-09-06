@@ -256,27 +256,14 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     };
 
 
-    // this.updateSession = function (user) {
-    //     session.firstName = user.firstName;
-    //     session.lastName = user.lastName;
-    //     session.birthday = user.birthday;
-    //     session.taxCode = user.taxCode;
-    //
-    //     localStorage.setItem(config.localStorageFile, angular.toJson(session));
-    // };
-    //
-    this.updateSession = function (newUser) {
-        var user = this.session();
-        session.firstName = newUser.firstName;
-        session.lastName = newUser.lastName;
-        session.birthday = newUser.birthday;
-        session.taxCode = newUser.taxCode;
+    this.updateSession = function (user) {
+        session.firstName = user.firstName;
+        session.lastName = user.lastName;
+        session.birthday = user.birthday;
+        session.taxCode = user.taxCode;
 
-        // localStorage.setItem(config.localStorageFile, angular.toJson(session));
-        this.setSession(user);
-
+        localStorage.setItem(config.localStorageFile, angular.toJson(session));
     };
-
 
     this.setSession = function (user) {
         session = user;
