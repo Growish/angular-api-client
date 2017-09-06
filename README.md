@@ -11,7 +11,7 @@ angular.module('demo', ['gwApiClient']).
 ````
 
 
-Initialize the API by:
+Inject "gwApi" service were needed and initialize the API by:
 
 ````js
 gwApi.initialize({
