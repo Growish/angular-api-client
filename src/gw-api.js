@@ -125,6 +125,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('restorePassword', '/passwordrecovery/');
 
+    methods.add('setImageUser', '/user/{0}/image/');
+
 
 
     var RequestClass = function (method, args) {

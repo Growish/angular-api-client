@@ -1,4 +1,4 @@
-// Compiled Thu Sep 07 2017 10:51:22 GMT+0200 (CEST)
+// Compiled Thu Sep 07 2017 15:23:42 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -125,6 +125,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('user.addressBookShare', '/user/{0}/address-book-share/');
 
     methods.add('restorePassword', '/passwordrecovery/');
+
+    methods.add('setImageUser', '/user/{0}/image/');
 
 
 
