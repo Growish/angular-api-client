@@ -40,6 +40,31 @@ gwApi.request('methodName').save({foo: 'bar'}).then();
 Check [http://growish.github.io/api-doc/](http://growish.github.io/api-doc/) for a complete list of methods and examples.
 
 
+#### Mapping data
+This client allows you to map data going out from your application o coming from the Growish API.
+A mapper process data before or/and after a request is made. For example, if you request the user information
+by ````gwApi.request('user', 'someUserId').read()```` the field *birthday* is formatted as: "1986-03-19 00:00:00"
+you can let the client handle a format conversion every time you make this request by 
+setting a mapper:
+
+````js
+gwApi.addMapper('user', 
+{   
+    in: function(user) {
+        user.creationDate = moment(user.creationDate, 'YYYY-MM-DD hh:mm:ss').format('DD/MM/YYYY');
+        return user;
+    },
+    out: function() {
+      return user;
+    }
+});
+````
+
+Now every time you request the user method, birthday will be formatted as DD/MM/YYYY.
+
+*listWallet.statement* returns a quite complicated data, take a look of the demo application in the demo folder to see
+ how the statementMapper helps you have a clean view code.
+
 #### Error Management
 
 ##### 400 - Format error

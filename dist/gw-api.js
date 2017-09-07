@@ -1,4 +1,4 @@
-// Compiled Wed Sep 06 2017 15:00:34 GMT+0200 (CEST)
+// Compiled Thu Sep 07 2017 10:51:22 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -85,6 +85,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('wallets', '/user/{0}/wallet/');
 
     methods.add('listWallets', '/user/{0}/list/');
+
+    methods.add('listWallet.statement', '/statement/{0}/')
 
     methods.add('newListWallet', '/list/');
 
@@ -272,7 +274,10 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         localStorage.setItem(config.localStorageFile, angular.toJson(user));
     };
 
-    this.session = function () {
+    this.session = function (i) {
+        if (typeof i !== "undefined" && i) {
+            return session;
+        }
         var deferred = $q.defer();
 
         if (session) {

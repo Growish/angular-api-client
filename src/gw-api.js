@@ -85,6 +85,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('listWallets', '/user/{0}/list/');
 
+    methods.add('listWallet.statement', '/statement/{0}/')
+
     methods.add('newListWallet', '/list/');
 
     //http://growish.github.io/api-doc/#api-Wallet-getWallet

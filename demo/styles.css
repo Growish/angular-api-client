@@ -1,0 +1,150 @@
+body {
+    background: #eee !important;
+}
+
+.header {
+    padding: 20px 50px;
+    background-color: cornsilk;
+}
+
+.wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.block {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 30px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.spacer20 {
+    padding: 20px 0;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999999;
+}
+
+.loader .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 25px;
+    padding: 10px 25px;
+    background: white;
+    border-radius: 5px;
+}
+
+.error {
+    font-size: 12px;
+    color: red;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+.block input {
+    width: 100%;
+    border-radius: 3px;
+    margin: 5px 0;
+    border: 1px solid lightblue;
+    padding: 5px 10px;
+}
+
+.statement {
+    width: 100%;
+}
+
+.statement  .date {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.statement  .date.month {
+    font-size: 12px;
+}
+
+.statement  .date.day {
+    font-size: 25px;
+}
+
+.statement  .date.year {
+    font-size: 12px;
+}
+
+.statement  .small-item .item-content {
+    padding: 0 !important;
+}
+
+.statement .amount-box {
+    padding: 25px 0 0 0;
+    text-align: center;
+}
+
+.statement .subtitle {
+    font-size: 12px !important;
+}
+
+.statement .extra-line {
+    color: #666;
+    font-size: 12px;
+}
+
+.statement .yellow {
+    color: #e7de1e;
+}
+
+.statement .green {
+    color: #1BBC9B;
+}
+
+.statement h3 {
+    font-size: 15px;
+}
