@@ -13,6 +13,7 @@
     <script src="app.js" type="application/javascript"></script>
     <script src="demo-controller.js" type="application/javascript"></script>
     <script src="statement-mapper.js" type="application/javascript"></script>
+    <script src="ng-file-select.js" type="application/javascript"></script>
 
 </head>
 
@@ -94,6 +95,12 @@
         </div>
         <div class="spacer20"></div>
         <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getListWalletStatement()">pull</button>
+    </div>
+
+    <div class="block">
+        <h4>Set image user</h4>
+        <img src="{{session.imageUrl}}" alt="">
+        <input type="file" ng-file-select="onFileSelect($files)"/>
     </div>
 
 </div>
