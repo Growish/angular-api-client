@@ -123,6 +123,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('restorePassword', '/passwordrecovery/');
 
+    methods.add('user.addChild', '/user/{0}/addChild/');
+
 
 
     var RequestClass = function (method, args) {

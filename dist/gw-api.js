@@ -1,4 +1,4 @@
-// Compiled Wed Sep 06 2017 15:00:34 GMT+0200 (CEST)
+// Compiled Fri Sep 08 2017 16:08:30 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -123,6 +123,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('user.addressBookShare', '/user/{0}/address-book-share/');
 
     methods.add('restorePassword', '/passwordrecovery/');
+
+    methods.add('user.addChild', '/user/{0}/addChild/');
 
 
 
@@ -272,7 +274,10 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         localStorage.setItem(config.localStorageFile, angular.toJson(user));
     };
 
-    this.session = function () {
+    this.session = function (i) {
+        if (typeof i !== "undefined" && i) {
+            return session;
+        }
         var deferred = $q.defer();
 
         if (session) {
