@@ -118,8 +118,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');
 
-    //http://growish.github.io/api-doc/#api-List-ImportContacts
-    methods.add('list.guests', '/list/{0}/guests/');
+    methods.add('user.importAddressBook', 'user/{0}/import-address-book/');
 
     //http://growish.github.io/api-doc/#api-User-shareAddressBook
     methods.add('user.addressBookShare', '/user/{0}/address-book-share/');
@@ -129,7 +128,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     methods.add('setImageUser', '/user/{0}/image/');
 
     methods.add('user.addChild', '/user/{0}/add-child/');
-
 
 
     var RequestClass = function (method, args) {
