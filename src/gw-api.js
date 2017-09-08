@@ -118,7 +118,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');
 
-    methods.add('user.importAddressBook', 'user/{0}/import-address-book/');
+    methods.add('user.importAddressBook', '/user/{0}/import-address-book/');
 
     //http://growish.github.io/api-doc/#api-User-shareAddressBook
     methods.add('user.addressBookShare', '/user/{0}/address-book-share/');

@@ -1,4 +1,4 @@
-// Compiled Fri Sep 08 2017 17:23:53 GMT+0200 (CEST)
+// Compiled Fri Sep 08 2017 17:31:44 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -119,7 +119,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');
 
-    methods.add('user.importAddressBook', 'user/{0}/import-address-book/');
+    methods.add('user.importAddressBook', '/user/{0}/import-address-book/');
 
     //http://growish.github.io/api-doc/#api-User-shareAddressBook
     methods.add('user.addressBookShare', '/user/{0}/address-book-share/');
