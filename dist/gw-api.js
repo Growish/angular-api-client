@@ -1,4 +1,4 @@
-// Compiled Fri Sep 08 2017 16:08:30 GMT+0200 (CEST)
+// Compiled Thu Sep 07 2017 16:58:02 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -16,6 +16,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         preserveUserSession: true,
         localStorageFile: 'gw-api-data'
     };
+
 
     var config = {};
 
@@ -86,6 +87,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('listWallets', '/user/{0}/list/');
 
+    methods.add('listWallet.statement', '/statement/{0}/')
+
     methods.add('newListWallet', '/list/');
 
     //http://growish.github.io/api-doc/#api-Wallet-getWallet
@@ -124,7 +127,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('restorePassword', '/passwordrecovery/');
 
-    methods.add('user.addChild', '/user/{0}/addChild/');
+    methods.add('setImageUser', '/user/{0}/image/');
 
 
 
@@ -156,10 +159,17 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     };
 
     var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache) {
-
         var method = angular.copy(_method);
         var args = angular.copy(_args);
-        var body = angular.copy(_body);
+
+        var body;
+        if(_body && _body.constructor.name === "File")
+            body = _body;
+        else
+            body = angular.copy(_body);
+
+
+
         var urlParams = angular.copy(_urlParams);
 
         var deferred = $q.defer();
@@ -184,9 +194,23 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
             return deferred.promise;
         }
 
+
         var headers = [];
-        headers['X-App-Key'] = config.appKey;
         headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        var data = null;
+
+        if(body && body.constructor.name === "File") {
+            headers['Content-Type'] = undefined;
+
+            data = new FormData();
+            data.append('0', body);
+
+        }
+        else if(body){
+            data = $httpParamSerializerJQLike(body);
+        }
+
+        headers['X-App-Key'] = config.appKey;
 
 
         if (session && session.token)
@@ -195,7 +219,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         var httpOptions = {
             cache: false,
             method: verb,
-            data: (body) ? $httpParamSerializerJQLike(body) : null,
+            data: data,
             url: config.baseUrl + endPoint,
             headers: headers,
             transformRequest: angular.identity
@@ -454,5 +478,4 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     };
 
 
-}])
-;
+}]);
