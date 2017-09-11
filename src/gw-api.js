@@ -129,6 +129,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('user.addChild', '/user/{0}/add-child/');
 
+    methods.add('user.updateAddressBook', '/user/{0}/address-book/{1}');
+
 
     var RequestClass = function (method, args) {
 
