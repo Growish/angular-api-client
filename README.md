@@ -40,6 +40,23 @@ gwApi.request('methodName').save({foo: 'bar'}).then();
 Check [http://growish.github.io/api-doc/](http://growish.github.io/api-doc/) for a complete list of methods and examples.
 
 
+#### Authentication and session
+To login a user and create a session you just need to call the alias method:
+````js
+gwApi.authenticate('email', 'password').then(
+    function success(session) {
+      gwApi.setSession(session);
+      //All request after this one will include automatically the user Token
+      //when needed.
+    },
+    function error(err) {
+        //Do something with err, read Error Management section.
+    }
+);
+````
+
+
+
 #### Mapping data
 This client allows you to map data going out from your application o coming from the Growish API.
 A mapper process data before or/and after a request is made. For example, if you request the user information
