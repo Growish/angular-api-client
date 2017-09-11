@@ -16,6 +16,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         localStorageFile: 'gw-api-data'
     };
 
+
     var config = {};
 
     var MethodCollection = function () {
@@ -117,14 +118,16 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');
 
-    //http://growish.github.io/api-doc/#api-List-ImportContacts
-    methods.add('list.guests', '/list/{0}/guests/');
+    methods.add('user.importAddressBook', '/user/{0}/import-address-book/');
 
     //http://growish.github.io/api-doc/#api-User-shareAddressBook
     methods.add('user.addressBookShare', '/user/{0}/address-book-share/');
 
     methods.add('restorePassword', '/passwordrecovery/');
 
+    methods.add('setImageUser', '/user/{0}/image/');
+
+    methods.add('user.addChild', '/user/{0}/add-child/');
 
 
     var RequestClass = function (method, args) {
@@ -155,10 +158,17 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     };
 
     var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache) {
-
         var method = angular.copy(_method);
         var args = angular.copy(_args);
-        var body = angular.copy(_body);
+
+        var body;
+        if(_body && _body.constructor.name === "File")
+            body = _body;
+        else
+            body = angular.copy(_body);
+
+
+
         var urlParams = angular.copy(_urlParams);
 
         var deferred = $q.defer();
@@ -183,9 +193,23 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             return deferred.promise;
         }
 
+
         var headers = [];
-        headers['X-App-Key'] = config.appKey;
         headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        var data = null;
+
+        if(body && body.constructor.name === "File") {
+            headers['Content-Type'] = undefined;
+
+            data = new FormData();
+            data.append('0', body);
+
+        }
+        else if(body){
+            data = $httpParamSerializerJQLike(body);
+        }
+
+        headers['X-App-Key'] = config.appKey;
 
 
         if (session && session.token)
@@ -194,7 +218,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         var httpOptions = {
             cache: false,
             method: verb,
-            data: (body) ? $httpParamSerializerJQLike(body) : null,
+            data: data,
             url: config.baseUrl + endPoint,
             headers: headers,
             transformRequest: angular.identity
@@ -453,5 +477,4 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     };
 
 
-})
-;
+});
