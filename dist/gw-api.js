@@ -1,4 +1,4 @@
-// Compiled Tue Sep 12 2017 14:28:41 GMT+0200 (CEST)
+// Compiled Tue Sep 12 2017 16:30:51 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -134,7 +134,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('user.addChild', '/user/{0}/add-child/');
 
-    methods.add('user.updateAddressBook', '/user/{0}/address-book/{1}');
+    methods.add('user.updateAddressBook', '/user/{0}/address-book/{1}/');
 
     methods.add('search.organization', '/search/organization/');
 
