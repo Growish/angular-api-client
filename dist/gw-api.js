@@ -1,4 +1,4 @@
-// Compiled Tue Sep 12 2017 14:27:37 GMT+0200 (CEST)
+// Compiled Mon Sep 11 2017 12:01:20 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -19,10 +19,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
 
     var config = {};
-
-    this.getBaseUrl = function () {
-        return config.env === 'developing' ? devBaseUrl : prodBaseUrl;
-    };
 
     var MethodCollection = function () {
 
@@ -133,6 +129,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('setImageUser', '/user/{0}/image/');
 
     methods.add('user.addChild', '/user/{0}/add-child/');
+
+    methods.add('user.updateAddressBook', '/user/{0}/address-book/{1}');
 
 
     var RequestClass = function (method, args) {
