@@ -1,4 +1,4 @@
-// Compiled Fri Sep 08 2017 17:31:44 GMT+0200 (CEST)
+// Compiled Tue Sep 12 2017 14:27:37 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -19,6 +19,10 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
 
     var config = {};
+
+    this.getBaseUrl = function () {
+        return config.env === 'developing' ? devBaseUrl : prodBaseUrl;
+    };
 
     var MethodCollection = function () {
 
