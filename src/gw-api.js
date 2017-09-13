@@ -137,6 +137,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('search.organization', '/search/organization/');
 
+    methods.add('user.setCommonFund', '/user/{0}/common-fund/');
+
 
     var RequestClass = function (method, args) {
 
