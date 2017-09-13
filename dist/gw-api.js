@@ -1,4 +1,4 @@
-// Compiled Wed Sep 13 2017 10:18:29 GMT+0200 (CEST)
+// Compiled Wed Sep 13 2017 10:19:23 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
