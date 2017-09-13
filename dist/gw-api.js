@@ -1,4 +1,4 @@
-// Compiled Wed Sep 13 2017 10:50:34 GMT+0200 (CEST)
+// Compiled Wed Sep 13 2017 10:53:59 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -114,11 +114,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     //http://growish.github.io/api-doc/#api-User-user_creditCard
     methods.add('user.creditCard', '/user/{0}/credit-card/');
 
-    //http://growish.github.io/api-doc/#api-User-newCommonFund
-    //http://growish.github.io/api-doc/#api-User-deleteCommonFund
-    //http://growish.github.io/api-doc/#api-User-getCommonFund
-    //http://growish.github.io/api-doc/#api-User-editCommonFund
-    methods.add('user.commonFund', '/user/{0}/common-fund/');
 
     //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');

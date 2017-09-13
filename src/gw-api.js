@@ -113,11 +113,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     //http://growish.github.io/api-doc/#api-User-user_creditCard
     methods.add('user.creditCard', '/user/{0}/credit-card/');
 
-    //http://growish.github.io/api-doc/#api-User-newCommonFund
-    //http://growish.github.io/api-doc/#api-User-deleteCommonFund
-    //http://growish.github.io/api-doc/#api-User-getCommonFund
-    //http://growish.github.io/api-doc/#api-User-editCommonFund
-    methods.add('user.commonFund', '/user/{0}/common-fund/');
 
     //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');
