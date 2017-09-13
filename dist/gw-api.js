@@ -1,4 +1,4 @@
-// Compiled Wed Sep 13 2017 10:53:59 GMT+0200 (CEST)
+// Compiled Wed Sep 13 2017 16:28:53 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -80,7 +80,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('auth', '/auth/');
 
     //http://growish.github.io/api-doc/#api-User-getUser
-    //http://growish.github.io/api-doc/#api-User-updateUser
     methods.add('user', '/user/{0}/');
 
     //http://growish.github.io/api-doc/#api-User-newUser
@@ -91,12 +90,11 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('listWallets', '/user/{0}/list/');
 
-    methods.add('listWallet.statement', '/statement/{0}/')
+    methods.add('listWallet.statement', '/statement/{0}/');
 
     methods.add('newListWallet', '/list/');
 
     //http://growish.github.io/api-doc/#api-Wallet-getWallet
-    //http://growish.github.io/api-doc/#api-Wallet-updateWallet
     methods.add('wallet', '/wallet/{0}/');
 
     //http://growish.github.io/api-doc/#api-Wallet-newWallet
@@ -105,13 +103,9 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('list.product', '/list/{0}/product/{1}/');
 
     //http://growish.github.io/api-doc/#api-User-deleteContact
-    //http://growish.github.io/api-doc/#api-User-newAddressBook
-    //http://growish.github.io/api-doc/#api-User-getAddressBook
     methods.add('user.addressBook', '/user/{0}/address-book/');
 
     //http://growish.github.io/api-doc/#api-User-updateCreditCard
-    //http://growish.github.io/api-doc/#api-User-newCreditCard
-    //http://growish.github.io/api-doc/#api-User-user_creditCard
     methods.add('user.creditCard', '/user/{0}/credit-card/');
 
 
@@ -132,8 +126,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('user.updateAddressBook', '/user/{0}/address-book/{1}/');
 
     methods.add('search.organization', '/search/organization/');
-
-    methods.add('wallet', '/wallet/{0}/');
 
     methods.add('setCommonFund', '/common-fund-wallet/');
 
