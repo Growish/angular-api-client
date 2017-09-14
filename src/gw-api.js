@@ -132,6 +132,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('commonFoundWallet', '/common-fund-wallet/{0}/');
 
+    methods.add('closeCommonFundWallet', '/close-common-fund-wallet/{0}/');
+
 
     var RequestClass = function (method, args) {
 
