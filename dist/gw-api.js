@@ -1,4 +1,4 @@
-// Compiled Thu Sep 14 2017 11:39:42 GMT+0200 (CEST)
+// Compiled Thu Sep 14 2017 18:25:36 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -134,6 +134,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('commonFoundWallet', '/common-fund-wallet/{0}/');
 
     methods.add('closeCommonFundWallet', '/close-common-fund-wallet/{0}/');
+
+    methods.add('fee', '/fee/');
 
 
     var RequestClass = function (method, args) {
