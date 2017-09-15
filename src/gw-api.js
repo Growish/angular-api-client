@@ -136,6 +136,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('fee', '/fee/');
 
+    methods.add('setSchool', '/school/');
+
 
     var RequestClass = function (method, args) {
 
