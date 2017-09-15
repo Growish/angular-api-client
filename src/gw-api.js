@@ -142,7 +142,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('cardContribution', '/card_contribution/');
 
-
     var RequestClass = function (method, args) {
 
         this.read = function (urlParams, cache) {
