@@ -138,6 +138,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('setSchool', '/school/');
 
+    methods.add('closeWallet', '/closewallet/{0}/');
+
 
     var RequestClass = function (method, args) {
 
