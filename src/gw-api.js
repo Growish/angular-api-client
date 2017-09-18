@@ -140,8 +140,11 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('closeWallet', '/closewallet/');
 
-    methods.add('updatePerks', '/wallet/{0}/perks/{1}');
+    methods.add('cardContribution', '/card_contribution/');
 
+    methods.add('withdrawalContribution', '/withdrawal_contribution/');
+
+    methods.add('walletComment', '/wallet/{0}/comment/');
 
     var RequestClass = function (method, args) {
 
