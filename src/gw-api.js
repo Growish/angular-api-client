@@ -144,6 +144,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('withdrawalContribution', '/withdrawal_contribution/');
 
+    methods.add('walletComment', '/wallet/{0}/comment/');
+
     var RequestClass = function (method, args) {
 
         this.read = function (urlParams, cache) {
