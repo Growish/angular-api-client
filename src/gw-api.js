@@ -148,6 +148,10 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('updatePerks', '/wallet/{0}/perk/{1}/');
 
+    methods.add('user.notifications', '/user/{0}/notification/');
+
+    methods.add('notification', '/checknoti/{0}/');
+
     var RequestClass = function (method, args) {
 
         this.read = function (urlParams, cache) {

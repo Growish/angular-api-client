@@ -140,4 +140,17 @@ app.controller('demoController', function ($scope, gwApi) {
         );
     };
 
+    $scope.getNotifications = function (project) {
+        $scope.loader = true;
+        gwApi.request('user.notifications', $scope.session.id).read({category: project}).then(
+            function success(notifications) {
+                $scope.loader = false;
+                console.log(notifications);
+            },
+            function error() {
+                $scope.loader = false;
+            }
+        );
+    }
+
 });

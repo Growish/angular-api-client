@@ -148,3 +148,12 @@ pre {
 .statement h3 {
     font-size: 15px;
 }
+
+.noty-box {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.noty-box a {
+    display: block;
+}

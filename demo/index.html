@@ -49,6 +49,12 @@
         <button ng-if="session.id" class="btn btn-lg btn-primary btn-block" type="button" ng-click="logoutUser()">
             Logout
         </button>
+
+        <div class="noty-box">
+            <a ng-if="session.id" href="" ng-click="getNotifications('growish')">- get user notifications for Growish -</a>
+            <a ng-if="session.id" href="" ng-click="getNotifications('wedding')">- get user notifications for ListaNozzeOnline -</a>
+            <a ng-if="session.id" href="" ng-click="getNotifications('scuolapay')">- get user notifications for ScuolaPay -</a>
+        </div>
     </div>
 
     <div class="block">
