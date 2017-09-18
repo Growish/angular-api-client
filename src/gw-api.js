@@ -146,7 +146,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('walletComment', '/wallet/{0}/comment/');
 
-    methods.add('updatePerks', '/wallet/{0}/perk/{1}/');
+    methods.add('updatePerks', '/wallet/{0}/perks/{1}/');
 
     var RequestClass = function (method, args) {
 
