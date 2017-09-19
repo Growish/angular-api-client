@@ -152,6 +152,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('notification', '/checknoti/{0}/');
 
+    methods.add('addPerk', '/wallet/{0}/perk/');
+
     var RequestClass = function (method, args) {
 
         this.read = function (urlParams, cache) {

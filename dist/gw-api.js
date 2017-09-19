@@ -1,4 +1,4 @@
-// Compiled Tue Sep 19 2017 18:50:18 GMT+0200 (CEST)
+// Compiled Tue Sep 19 2017 19:07:29 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -152,6 +152,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('user.notifications', '/user/{0}/notification/');
 
     methods.add('notification', '/checknoti/{0}/');
+
+    methods.add('addPerk', '/wallet/{0}/perk/');
 
     var RequestClass = function (method, args) {
 
