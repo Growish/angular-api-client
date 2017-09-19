@@ -1,4 +1,4 @@
-// Compiled Mon Sep 18 2017 19:42:51 GMT+0200 (CEST)
+// Compiled Tue Sep 19 2017 18:50:18 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -374,6 +374,14 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
         return deferred.promise;
     };
+
+    this.killSession = function () {
+        var deferred = $q.defer();
+        session = null;
+        localStorage.removeItem(config.localStorageFile);
+        deferred.resolve();
+    };
+
 
     this.initialize = function (options) {
         if (typeof options.baseUrl === 'undefined' && typeof options.env !== 'undefined' && options.env === 'production')

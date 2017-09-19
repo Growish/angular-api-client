@@ -374,6 +374,14 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         return deferred.promise;
     };
 
+    this.killSession = function () {
+        var deferred = $q.defer();
+        session = null;
+        localStorage.removeItem(config.localStorageFile);
+        deferred.resolve();
+    };
+
+
     this.initialize = function (options) {
         if (typeof options.baseUrl === 'undefined' && typeof options.env !== 'undefined' && options.env === 'production')
             options.baseUrl = prodBaseUrl;

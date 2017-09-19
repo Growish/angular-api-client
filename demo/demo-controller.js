@@ -50,7 +50,7 @@ app.controller('demoController', function ($scope, gwApi) {
             function success() {
                 $scope.loader = false;
                 $scope.session = {};
-
+                gwApi.killSession();
                 //gwApi.logout cleans the session from cache and from localStorage
 
             },
