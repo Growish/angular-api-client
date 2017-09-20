@@ -381,10 +381,9 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     };
 
     this.killSession = function () {
-        var deferred = $q.defer();
         session = null;
         localStorage.removeItem(config.localStorageFile);
-        deferred.resolve();
+        return true;
     };
 
 
