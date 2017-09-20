@@ -126,11 +126,11 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('search.organization', '/search/organization/');
 
-    methods.add('setCommonFund', '/common-fund-wallet/');
+    methods.add('newCommonFund', '/common-fund-wallet/');
 
-    methods.add('user.commonFund', '/user/{0}/common-fund-wallet/');
+    methods.add('user.commonFunds', '/user/{0}/common-fund-wallet/');
 
-    methods.add('commonFoundWallet', '/common-fund-wallet/{0}/');
+    methods.add('commonFund', '/common-fund-wallet/{0}/');
 
     methods.add('closeCommonFundWallet', '/close-common-fund-wallet/{0}/');
 
