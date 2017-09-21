@@ -160,6 +160,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('beneficiary', '/beneficiary/');
 
+    methods.add('withdrawal', '/withdrawal/');
+
     var RequestClass = function (method, args) {
 
         this.read = function (urlParams, cache) {
