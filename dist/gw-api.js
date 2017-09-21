@@ -1,4 +1,4 @@
-// Compiled Wed Sep 20 2017 17:03:37 GMT+0200 (CEST)
+// Compiled Thu Sep 21 2017 15:52:31 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -158,6 +158,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('statement', '/statement/{0}/');
 
     methods.add('walletInvite', '/wallet/{0}/invite/');
+
+    methods.add('beneficiary', '/beneficiary/');
 
     var RequestClass = function (method, args) {
 
