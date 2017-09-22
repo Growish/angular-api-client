@@ -1,4 +1,4 @@
-// Compiled Fri Sep 22 2017 11:34:26 GMT+0200 (CEST)
+// Compiled Fri Sep 22 2017 15:26:46 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -470,8 +470,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
             var now = new Date().getTime();
             var x = getCachedIndex(url);
-
-            console.table(_cachedUrl);
 
             if(x >= 0) {
                 if (!_cachedUrl[x].expire || _cachedUrl[x].expire <= now) {

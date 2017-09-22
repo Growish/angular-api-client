@@ -470,8 +470,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             var now = new Date().getTime();
             var x = getCachedIndex(url);
 
-            console.table(_cachedUrl);
-
             if(x >= 0) {
                 if (!_cachedUrl[x].expire || _cachedUrl[x].expire <= now) {
                     _cachedUrl[x].expire = null;
