@@ -185,7 +185,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     var ErrorResponseClass = function () {
         this.code = -1;
         this.validationErrors = {};
-        this.validationErrorsFull = [];
+        this.validationErrorsFull = {};
         this.handled = false;
         this.message = null;
     };
