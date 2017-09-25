@@ -185,6 +185,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     var ErrorResponseClass = function () {
         this.code = -1;
         this.validationErrors = {};
+        this.validationErrorsFull = [];
         this.handled = false;
         this.message = null;
     };
@@ -280,6 +281,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
                     response.code = err.status;
 
                     if(err.status === 400) {
+
+                        response.validationErrorsFull = err.data.message;
 
                         angular.forEach(err.data.message, function (errors, field) {
                             angular.forEach(errors, function (msg, error) {

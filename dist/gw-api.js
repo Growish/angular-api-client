@@ -1,4 +1,4 @@
-// Compiled Fri Sep 22 2017 15:26:46 GMT+0200 (CEST)
+// Compiled Mon Sep 25 2017 13:27:21 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -186,6 +186,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     var ErrorResponseClass = function () {
         this.code = -1;
         this.validationErrors = {};
+        this.validationErrorsFull = [];
         this.handled = false;
         this.message = null;
     };
@@ -281,6 +282,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
                     response.code = err.status;
 
                     if(err.status === 400) {
+
+                        response.validationErrorsFull = err.data.message;
 
                         angular.forEach(err.data.message, function (errors, field) {
                             angular.forEach(errors, function (msg, error) {
