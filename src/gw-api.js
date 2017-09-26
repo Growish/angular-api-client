@@ -20,7 +20,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     var config = {};
 
     this.getBaseUrl = function () {
-        return config.env === 'developing' ? devBaseUrl : prodBaseUrl;
+        return config.env === 'development' ? devBaseUrl : prodBaseUrl;
     };
 
     var MethodCollection = function () {
