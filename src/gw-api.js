@@ -164,6 +164,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('setWalletImage', '/wallet/{0}/image/');
 
+    methods.add('business', '/business/');
+
     var RequestClass = function (method, args) {
 
         this.read = function (urlParams, cache) {

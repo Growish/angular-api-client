@@ -9,6 +9,7 @@ app.controller('demoController', function ($scope, gwApi) {
     };
 
     $scope.listWallet = "";
+    $scope.business = "";
 
     gwApi.session().then(
         function (user) {
@@ -103,6 +104,19 @@ app.controller('demoController', function ($scope, gwApi) {
             }
         );
 
+    };
+
+    $scope.getBusiness = function () {
+        $scope.loader = true;
+        gwApi.request('business').read({lat: 45.0606543, lon: 7.6855409, radius: 2000, network: "guidasposi", filterByName: "Vivi"}).then(
+            function success(business) {
+                $scope.business = business;
+                $scope.loader = false;
+            },
+            function error() {
+                $scope.loader = false;
+            }
+        )
     };
 
     $scope.getListWalletStatement = function () {
