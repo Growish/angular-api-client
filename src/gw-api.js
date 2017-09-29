@@ -166,6 +166,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('business', '/business/');
 
+    methods.add('chargeWallet', '/charge-wallet/');
+
     var RequestClass = function (method, args) {
 
         this.read = function (urlParams, cache) {

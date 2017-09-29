@@ -1,4 +1,4 @@
-// Compiled Thu Sep 28 2017 14:18:11 GMT+0200 (CEST)
+// Compiled Fri Sep 29 2017 12:03:12 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -166,6 +166,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('setWalletImage', '/wallet/{0}/image/');
 
     methods.add('business', '/business/');
+
+    methods.add('chargeWallet', '/charge-wallet/');
 
     var RequestClass = function (method, args) {
 
