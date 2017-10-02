@@ -379,10 +379,11 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     this.logout = function () {
         var deferred = $q.defer();
 
+        session = null;
+        localStorage.removeItem(config.localStorageFile);
+
         me.request('auth').delete().then(
             function () {
-                session = null;
-                localStorage.removeItem(config.localStorageFile);
                 deferred.resolve();
             },
             function (err) {
