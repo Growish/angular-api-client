@@ -1,4 +1,4 @@
-// Compiled Fri Sep 29 2017 12:03:12 GMT+0200 (CEST)
+// Compiled Thu Oct 05 2017 13:00:57 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -6,6 +6,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     var initialized = false;
 
     var devBaseUrl = 'https://apidev.growish.com/v1';
+    var staBaseUrl = 'https://apidev.growish.com/v1';
     var prodBaseUrl = 'https://api.growish.com/v1';
 
     var session;
@@ -21,7 +22,18 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     var config = {};
 
     this.getBaseUrl = function () {
-        return config.env === 'development' ? devBaseUrl : prodBaseUrl;
+
+        switch(config.env) {
+            case 'development':
+                return devBaseUrl;
+                break;
+            case 'staging':
+                return staBaseUrl;
+                break;
+            case 'production':
+                return prodBaseUrl;
+                break;
+        }
     };
 
     var MethodCollection = function () {
@@ -380,10 +392,11 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     this.logout = function () {
         var deferred = $q.defer();
 
+        session = null;
+        localStorage.removeItem(config.localStorageFile);
+
         me.request('auth').delete().then(
             function () {
-                session = null;
-                localStorage.removeItem(config.localStorageFile);
                 deferred.resolve();
             },
             function (err) {

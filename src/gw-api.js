@@ -5,6 +5,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     var initialized = false;
 
     var devBaseUrl = 'https://apidev.growish.com/v1';
+    var staBaseUrl = 'https://apidev.growish.com/v1';
     var prodBaseUrl = 'https://api.growish.com/v1';
 
     var session;
@@ -20,7 +21,18 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     var config = {};
 
     this.getBaseUrl = function () {
-        return config.env === 'development' ? devBaseUrl : prodBaseUrl;
+
+        switch(config.env) {
+            case 'development':
+                return devBaseUrl;
+                break;
+            case 'staging':
+                return staBaseUrl;
+                break;
+            case 'production':
+                return prodBaseUrl;
+                break;
+        }
     };
 
     var MethodCollection = function () {
