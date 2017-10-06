@@ -108,7 +108,7 @@ app.controller('demoController', function ($scope, gwApi) {
 
     $scope.getBusiness = function () {
         $scope.loader = true;
-        gwApi.request('business').read({lat: 45.0606543, lon: 7.6855409, radius: 2000, network: "guidasposi", filterByName: "Vivi"}).then(
+        gwApi.request('business').read({lat: 45.0606543, lon: 7.6855409, radius: 2000, network: "NozzePay", filterByName: ""}).then(
             function success(business) {
                 $scope.business = business;
                 $scope.loader = false;
