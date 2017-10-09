@@ -7,7 +7,6 @@ app.controller('demoController', function ($scope, gwApi) {
         email: "",
         password: ""
     };
-
     $scope.listWallet = "";
     $scope.business = "";
 
@@ -52,7 +51,6 @@ app.controller('demoController', function ($scope, gwApi) {
                 $scope.loader = false;
                 $scope.session = {};
                 //gwApi.logout cleans the session from cache and from localStorage
-
             },
             function error() {
                 $scope.loader = false;
