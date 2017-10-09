@@ -5,7 +5,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     var initialized = false;
 
     var devBaseUrl = 'https://apidev.growish.com/v1';
-    var staBaseUrl = 'https://apidev.growish.com/v1';
     var prodBaseUrl = 'https://api.growish.com/v1';
 
     var session;
@@ -18,21 +17,10 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     };
 
 
-    var config = {};
+    var apiConfig = {};
 
     this.getBaseUrl = function () {
-
-        switch(config.env) {
-            case 'development':
-                return devBaseUrl;
-                break;
-            case 'staging':
-                return staBaseUrl;
-                break;
-            case 'production':
-                return prodBaseUrl;
-                break;
-        }
+        return apiConfig.baseUrl;
     };
 
     var MethodCollection = function () {
@@ -260,7 +248,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             data = $httpParamSerializerJQLike(body);
         }
 
-        headers['X-App-Key'] = config.appKey;
+        headers['X-App-Key'] = apiConfig.appKey;
 
 
         if (session && session.token)
@@ -270,7 +258,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             cache: false,
             method: verb,
             data: data,
-            url: config.baseUrl + endPoint,
+            url: apiConfig.baseUrl + endPoint,
             headers: headers,
             transformRequest: angular.identity
         };
@@ -308,22 +296,22 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
                             });
                         });
 
-                        if(typeof config.error400 === 'function') {
+                        if(typeof apiConfig.error400 === 'function') {
                             response.handled = true;
-                            config.error400(response);
+                            apiConfig.error400(response);
                         }
 
                         deferred.reject(response);
                     }
-                    else if(err.status === 401 && typeof config.error401 === 'function') {
+                    else if(err.status === 401 && typeof apiConfig.error401 === 'function') {
                         response.handled = true;
-                        config.error401(err.data);
+                        apiConfig.error401(err.data);
                         deferred.reject(response);
                     }
-                    else if(err.status === 403 && typeof config.error403 === 'function') {
+                    else if(err.status === 403 && typeof apiConfig.error403 === 'function') {
                         response.handled = true;
                         response.message = err.data.message;
-                        config.error403(err.data);
+                        apiConfig.error403(err.data);
                         deferred.reject(response);
                     }
                     else
@@ -342,12 +330,12 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         session.birthday = user.birthday;
         session.taxCode = user.taxCode;
 
-        localStorage.setItem(config.localStorageFile, angular.toJson(session));
+        localStorage.setItem(apiConfig.localStorageFile, angular.toJson(session));
     };
 
     this.setSession = function (user) {
         session = user;
-        localStorage.setItem(config.localStorageFile, angular.toJson(user));
+        localStorage.setItem(apiConfig.localStorageFile, angular.toJson(user));
     };
 
     this.session = function (i) {
@@ -361,7 +349,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             deferred.resolve(session);
         }
         else {
-            var _session = localStorage.getItem(config.localStorageFile);
+            var _session = localStorage.getItem(apiConfig.localStorageFile);
             if (_session)
                 _session = angular.fromJson(_session);
 
@@ -374,7 +362,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
                     },
                     function error() {
                         debugMsg('Session found in local storage but invalidated in API');
-                        localStorage.removeItem(config.localStorageFile);
+                        localStorage.removeItem(apiConfig.localStorageFile);
                         deferred.reject();
                     }
                 );
@@ -392,7 +380,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         var deferred = $q.defer();
 
         session = null;
-        localStorage.removeItem(config.localStorageFile);
+        localStorage.removeItem(apiConfig.localStorageFile);
 
         me.request('auth').delete().then(
             function () {
@@ -411,9 +399,9 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         if (typeof options.baseUrl === 'undefined' && typeof options.env !== 'undefined' && options.env === 'production')
             options.baseUrl = prodBaseUrl;
 
-        angular.extend(config, defaults, options);
+        angular.extend(apiConfig, defaults, options);
         initialized = true;
-        debugMsg('I have been initialized with this config', config);
+        debugMsg('I have been initialized with this config', apiConfig);
     };
 
     this.addSeed = function (methodName, data) {
@@ -523,10 +511,11 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     var cacheManager = new CacheClass();
 
     var debugMsg = function (msg, obj) {
-        if (config.env !== 'production')
+        if (apiConfig.env !== 'production') {
             console.log('***', 'GW API CLIENT:', msg, '***');
-        if (obj)
-            console.log(obj);
+            if (obj)
+                console.log(obj);
+        }
     };
 
 
