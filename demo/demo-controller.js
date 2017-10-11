@@ -249,7 +249,7 @@ app.controller('demoController', function ($scope, gwApi) {
             function error(err) {
                 $scope.loader = false;
                 if(err.code === 417){
-                    alert('This method is asking for a pin, the api sand a pin number to the cellphone registered to the list, if you are testing outside of Italy please contact a Growish developer');
+                    alert('This method is asking for a pin, the api send a pin number to the cellphone registered to the list, if you are testing outside of Italy please contact a Growish developer');
                     $scope.pinRequired = true;
                 };
 
