@@ -115,6 +115,55 @@
         <input type="file" ng-file-select="onFileSelect($files)"/>
     </div>
 
+    <div class="block statement">
+        <h4>
+            Restore Password
+        </h4>
+        <input type="text" ng-model="lostPasswordForm.email" placeholder='email'/>
+
+        <div class="spacer20"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="lostPassword()">pull</button>
+    </div>
+
+    <div class="block statement">
+        <h4>
+            Create new Beneficiary
+        </h4>
+        <input type="text" ng-model="beneficiary.bankAccountIBAN" placeholder='bankAccountIBAN'/>
+        <input type="text" ng-model="beneficiary.bankAccountOwnerAddress" placeholder='bankAccountOwnerAddress'/>
+        <input type="text" ng-model="beneficiary.bankAccountOwnerName" placeholder='bankAccountOwnerName'/>
+
+        <div class="spacer20"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="newBeneficiary()">pull</button>
+    </div>
+
+
+    <div class="block statement">
+        <h4>
+            Get Beneficiaries
+        </h4>
+
+        <pre>{{beneficiaryData}}</pre>
+
+        <div class="spacer20"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getBeneficiary()">pull</button>
+    </div>
+
+    <div class="block statement">
+        <h4>
+            Cash out
+        </h4>
+
+        <input type="password" ng-model="withdrawalForm.password" placeholder='password'/>
+        <input type="text" ng-model="withdrawalForm.beneficiaryId" placeholder='beneficiaryId'/>
+        <input type="text" ng-model="withdrawalForm.walletId" placeholder='walletId'/>
+        <input type="number" ng-model="withdrawalForm.amount" placeholder='amount'/>
+        <input type="text" ng-model="withdrawalForm.pin" ng-if="pinRequired" placeholder='Pin'/>
+
+        <div class="spacer20"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="cashOut()">Cashout</button>
+
+    </div>
 </div>
 
 </body>

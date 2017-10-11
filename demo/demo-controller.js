@@ -9,6 +9,13 @@ app.controller('demoController', function ($scope, gwApi) {
     };
     $scope.listWallet = "";
     $scope.business = "";
+    $scope.lostPasswordForm = {
+        email: ''
+    };
+    $scope.beneficiary = {};
+    $scope.withdrawalForm = {};
+
+    $scope.pinRequired = false;
 
     gwApi.session().then(
         function (user) {
@@ -162,6 +169,93 @@ app.controller('demoController', function ($scope, gwApi) {
                 $scope.loader = false;
             }
         );
-    }
+    };
+
+
+    $scope.lostPassword = function () {
+        $scope.loader = true;
+        gwApi.request('restorePassword').save({
+            email: $scope.lostPasswordForm.email
+        }).then(
+            function success() {
+                $scope.loader = false;
+                alert('Success!');
+                $scope.lostPasswordForm.email = "";
+            },
+            function error() {
+                $scope.loader = false;
+            }
+        )
+    };
+
+
+    $scope.newBeneficiary = function () {
+        $scope.loader = true;
+        gwApi.request('beneficiary').save({
+            bankAccountIBAN: $scope.beneficiary.bankAccountIBAN,
+            bankAccountOwnerAddress: $scope.beneficiary.bankAccountOwnerAddress,
+            bankAccountOwnerName: $scope.beneficiary.bankAccountOwnerName
+
+        }).then(
+            function success() {
+                $scope.loader = false;
+                alert('Success!');
+                $scope.beneficiary = {
+                    bankAccountIBAN: '',
+                    bankAccountOwnerAddress: '',
+                    bankAccountOwnerName: ''
+                }
+            },
+            function error() {
+
+            }
+        )
+    };
+
+    $scope.getBeneficiary = function () {
+        $scope.loader = true;
+        gwApi.request('beneficiary').read().then(
+            function success(response) {
+                $scope.loader = false;
+                $scope.beneficiaryData = response;
+            },
+            function error() {
+
+            }
+        );
+    };
+
+    $scope.cashOut = function () {
+        $scope.loader = true;
+        gwApi.request('withdrawal').save({
+            walletId: $scope.withdrawalForm.walletId,
+            beneficiaryId: $scope.withdrawalForm.beneficiaryId,
+            amount: $scope.withdrawalForm.amount * 100,
+            password: $scope.withdrawalForm.password,
+            pin: $scope.withdrawalForm.pin
+        }).then(
+            function success() {
+                $scope.loader = false;
+                $scope.withdrawalForm = {
+                    walletId:'',
+                    beneficiaryId:'',
+                    amount:'',
+                    password:'',
+                    pin:''
+                };
+                $scope.pinRequired = false;
+                alert('Cash out complete!');
+            },
+            function error(err) {
+                $scope.loader = false;
+                if(err.code === 417){
+                    alert('This method is asking for a pin, the api sand a pin number to the cellphone registered to the list, if you are testing outside of Italy please contact a Growish developer');
+                    $scope.pinRequired = true;
+                };
+
+            }
+        )
+    };
+
 
 });
