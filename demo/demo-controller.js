@@ -14,7 +14,6 @@ app.controller('demoController', function ($scope, gwApi) {
     };
     $scope.beneficiary = {};
     $scope.withdrawalForm = {};
-
     $scope.pinRequired = false;
 
     gwApi.session().then(
