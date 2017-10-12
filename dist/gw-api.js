@@ -1,4 +1,4 @@
-// Compiled Thu Oct 12 2017 12:32:28 GMT+0200 (CEST)
+// Compiled Thu Oct 12 2017 12:37:44 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -171,7 +171,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('transferContribution', '/transfer_contribution/');
 
-    methods.add('searchOrganization', '/search-organization/?type=school&organization={0}');
+    methods.add('searchOrganization', '/search-organization/');
 
 
 

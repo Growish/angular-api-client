@@ -170,7 +170,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('transferContribution', '/transfer_contribution/');
 
-    methods.add('searchOrganization', '/search-organization/?type=school&organization={0}');
+    methods.add('searchOrganization', '/search-organization/');
 
 
 
