@@ -99,8 +99,9 @@ app.controller('demoController', function ($scope, gwApi) {
         var session = gwApi.session(true);
 
         gwApi.request('listWallets', session.id).read().then(
-            function success(userListWallts) {
-                $scope.userListWallts = userListWallts;
+            function success(userListWallets) {
+                console.log(userListWallets);
+                $scope.userListWallts = userListWallets;
                 $scope.loader = false;
             },
             function error() {
@@ -112,9 +113,10 @@ app.controller('demoController', function ($scope, gwApi) {
 
     $scope.getBusiness = function () {
         $scope.loader = true;
-        gwApi.request('business').read({lat: 45.0606543, lon: 7.6855409, radius: 2000, network: "NozzePay", filterByName: ""}).then(
-            function success(business) {
-                $scope.business = business;
+        gwApi.request('business').setFullResponse().read({lat: 45.0606543, lon: 7.6855409, radius: 20000, network: "NozzePay", filterByName: "", page: 1}).then(
+            function success(response) {
+                $scope.businessPagination = response.pagination;
+                $scope.business = response.data;
                 $scope.loader = false;
             },
             function error() {

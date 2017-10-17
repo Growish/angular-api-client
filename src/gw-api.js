@@ -174,20 +174,28 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     var RequestClass = function (method, args) {
 
+        var me = this;
+        var fullResponse = false;
+
         this.read = function (urlParams, cache) {
-            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache);
+            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse);
         };
 
         this.save = function (body) {
-            return new ServerCallPromise(method, args, body, 'POST', null, null);
+            return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse);
         };
 
         this.update = function (body) {
-            return new ServerCallPromise(method, args, body, 'PUT', null, null);
+            return new ServerCallPromise(method, args, body, 'PUT', null, null, fullResponse);
         };
 
         this.delete = function () {
-            return new ServerCallPromise(method, args, null, 'DELETE', null, null);
+            return new ServerCallPromise(method, args, null, 'DELETE', null, null, fullResponse);
+        };
+
+        this.setFullResponse = function () {
+            fullResponse = true;
+            return me;
         }
 
     };
@@ -200,7 +208,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         this.message = null;
     };
 
-    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache) {
+    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache, fullResponse) {
         var method = angular.copy(_method);
         var args = angular.copy(_args);
 
@@ -280,10 +288,20 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         $http(httpOptions)
             .then(
                 function success(response) {
-                    if (method.mapper.in)
-                        deferred.resolve(method.mapper.in(response.data.data));
+
+                    var payload;
+
+                    if(!fullResponse)
+                        payload = method.mapper.in ? method.mapper.in(response.data.data) : response.data.data;
                     else
-                        deferred.resolve(response.data.data);
+                        payload = {
+                            data: method.mapper.in ? method.mapper.in(response.data.data) : response.data.data,
+                            pagination: response.data.pagination
+                        };
+
+
+                    deferred.resolve(payload);
+
                 },
                 function error(err) {
 
