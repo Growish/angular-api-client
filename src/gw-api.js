@@ -172,6 +172,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('getList', '/list/{0}/');
 
+    methods.add('sendMoney', '/transfer/');
+
 
 
     var RequestClass = function (method, args) {
