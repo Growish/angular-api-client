@@ -170,6 +170,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('transferContribution', '/transfer_contribution/');
 
+    methods.add('getList', '/list/{0}/');
+
 
 
     var RequestClass = function (method, args) {

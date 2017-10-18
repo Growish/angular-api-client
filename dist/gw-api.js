@@ -1,4 +1,4 @@
-// Compiled Tue Oct 17 2017 11:49:32 GMT+0200 (CEST)
+// Compiled Wed Oct 18 2017 14:58:26 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -170,6 +170,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('chargeWallet', '/charge-wallet/');
 
     methods.add('transferContribution', '/transfer_contribution/');
+
+    methods.add('getList', '/list/{0}/');
 
 
 
