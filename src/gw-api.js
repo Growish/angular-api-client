@@ -174,6 +174,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('sendMoney', '/transfer/');
 
+    methods.add('checkContribution', '/check-contribution/{0}/');
+
 
 
     var RequestClass = function (method, args) {
