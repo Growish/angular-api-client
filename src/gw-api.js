@@ -407,15 +407,16 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     this.logout = function () {
         var deferred = $q.defer();
 
-        session = null;
-        localStorage.removeItem(apiConfig.localStorageFile);
-
         me.request('auth').delete().then(
             function () {
                 deferred.resolve();
+                session = null;
+                localStorage.removeItem(apiConfig.localStorageFile);
             },
             function (err) {
                 deferred.reject(err);
+                session = null;
+                localStorage.removeItem(apiConfig.localStorageFile);
             }
         );
 
