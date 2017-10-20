@@ -176,6 +176,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('checkContribution', '/check-contribution/{0}/');
 
+    methods.add('addressInvite', '/wallet/{0}/address-invite/');
+
 
 
     var RequestClass = function (method, args) {
