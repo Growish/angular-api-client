@@ -1,4 +1,4 @@
-// Compiled Wed Oct 25 2017 17:38:12 GMT+0200 (CEST)
+// Compiled Wed Oct 25 2017 17:40:29 GMT+0200 (CEST)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -306,7 +306,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
                         payload = {
                             data: method.mapper.in ? method.mapper.in(response.data.data) : response.data.data,
                             pagination: response.data.pagination,
-                            message: typeof response.data.pagination === 'string' ? response.data.pagination : null
+                            message: typeof response.data.message === 'string' ? response.data.message : null
                         };
 
 
