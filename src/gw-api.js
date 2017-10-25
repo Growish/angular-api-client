@@ -304,7 +304,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
                     else
                         payload = {
                             data: method.mapper.in ? method.mapper.in(response.data.data) : response.data.data,
-                            pagination: response.data.pagination
+                            pagination: response.data.pagination,
+                            message: typeof response.data.pagination === 'string' ? response.data.pagination : null
                         };
 
 
