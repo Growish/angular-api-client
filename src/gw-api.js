@@ -354,6 +354,10 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     };
 
+    var dropSession = function () {
+        session = null;
+        localStorage.removeItem(apiConfig.localStorageFile);
+    };
 
     this.updateSession = function (user) {
         session.firstName = user.firstName;
@@ -413,19 +417,18 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         me.request('auth').delete().then(
             function () {
                 deferred.resolve();
-                session = null;
-                localStorage.removeItem(apiConfig.localStorageFile);
             },
             function (err) {
                 deferred.reject(err);
-                session = null;
-                localStorage.removeItem(apiConfig.localStorageFile);
             }
-        );
+        ).finally(dropSession);
 
         return deferred.promise;
     };
 
+    this.dropSession = function () {
+        dropSession();
+    };
 
     this.initialize = function (options) {
         if (typeof options.baseUrl === 'undefined' && typeof options.env !== 'undefined' && options.env === 'production')

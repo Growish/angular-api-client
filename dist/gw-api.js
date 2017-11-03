@@ -1,4 +1,4 @@
-// Compiled Wed Oct 25 2017 17:40:29 GMT+0200 (CEST)
+// Compiled Fri Nov 03 2017 17:25:14 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -355,6 +355,10 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     };
 
+    var dropSession = function () {
+        session = null;
+        localStorage.removeItem(apiConfig.localStorageFile);
+    };
 
     this.updateSession = function (user) {
         session.firstName = user.firstName;
@@ -414,19 +418,18 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         me.request('auth').delete().then(
             function () {
                 deferred.resolve();
-                session = null;
-                localStorage.removeItem(apiConfig.localStorageFile);
             },
             function (err) {
                 deferred.reject(err);
-                session = null;
-                localStorage.removeItem(apiConfig.localStorageFile);
             }
-        );
+        ).finally(dropSession);
 
         return deferred.promise;
     };
 
+    this.dropSession = function () {
+        dropSession();
+    };
 
     this.initialize = function (options) {
         if (typeof options.baseUrl === 'undefined' && typeof options.env !== 'undefined' && options.env === 'production')
