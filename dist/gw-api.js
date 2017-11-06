@@ -1,4 +1,4 @@
-// Compiled Mon Nov 06 2017 11:06:32 GMT+0100 (CET)
+// Compiled Mon Nov 06 2017 11:29:16 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -178,8 +178,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('checkContribution', '/check-contribution/{0}/');
 
     methods.add('addressInvite', '/wallet/{0}/address-invite/');
-
-    methods.add('userInvitePdf', '/user-invite-pdf/{0}/');
 
 
 
