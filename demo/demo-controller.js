@@ -111,9 +111,12 @@ app.controller('demoController', function ($scope, gwApi) {
 
     };
 
+    //THE LAST PARAMETER IN READ; "10", INDICATES
+    //THE API TO CACHE THE RESPONSE FOR 10 SECONDS
+    //TO FLUSH THE API CASH IN ANY MOMENT USE gwApi.flushCache()
     $scope.getBusiness = function () {
         $scope.loader = true;
-        gwApi.request('business').setFullResponse().read({lat: 45.0606543, lon: 7.6855409, radius: 20000, network: "NozzePay", filterByName: "", page: 1}).then(
+        gwApi.request('business').setFullResponse().read({lat: 45.0606543, lon: 7.6855409, radius: 20000, network: "NozzePay", filterByName: "", page: 1}, 10).then(
             function success(response) {
                 $scope.businessPagination = response.pagination;
                 $scope.business = response.data;
