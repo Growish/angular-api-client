@@ -1,4 +1,4 @@
-// Compiled Tue Nov 07 2017 12:26:30 GMT+0100 (CET)
+// Compiled Mon Nov 06 2017 12:09:58 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -179,6 +179,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('addressInvite', '/wallet/{0}/address-invite/');
 
+    methods.add('accessToken', '/accessToken/{0}/');
 
 
     var RequestClass = function (method, args) {
@@ -293,7 +294,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
             cacheManager.add(httpOptions.url, cache);
         }
 
-        debugMsg(httpOptions);
+
         $http(httpOptions)
             .then(
                 function success(response) {
@@ -511,10 +512,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
             return -1;
         };
 
-        this.clear = function () {
-          _cachedUrl = [];
-        };
-
         this.inCache = function (url) {
 
             var now = new Date().getTime();
@@ -529,23 +526,19 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
             }
             return false;
         };
-
         this.add = function (url, time) {
 
             var now = new Date().getTime();
             var x = getCachedIndex(url);
 
             if(x >= 0) {
-                if(_cachedUrl[x].expire > now)
-                    return true;
-
                 _cachedUrl[x].expire = now + time * 1000;
                 return true;
             }
 
             _cachedUrl.push({
                 url: url,
-                expire: now + time * 1000
+                expire: now
             });
 
             return true;
@@ -553,11 +546,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     };
 
     var cacheManager = new CacheClass();
-
-    this.flushCache = function () {
-        cacheManager.clear();
-        return true;
-    };
 
     var debugMsg = function (msg, obj) {
         if (apiConfig.env !== 'production') {
