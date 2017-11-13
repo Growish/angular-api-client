@@ -156,6 +156,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('statement', '/statement/{0}/');
 
+    methods.add('commonFundStatement', '/commonfund-statement/{0}/');
+
     methods.add('walletInvite', '/wallet/{0}/invite/');
 
     methods.add('beneficiary', '/beneficiary/');
