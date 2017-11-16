@@ -182,6 +182,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('accessToken', '/access-token/{0}/');
 
+    methods.add('addNewProduct', '/wallet/{0}/product/');
+
 
     var RequestClass = function (method, args) {
 
