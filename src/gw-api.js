@@ -186,6 +186,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('deleteProduct', '/wallet/{0}/product/{1}/');
 
+    methods.add('smsinvite', '/smsinvite/');
 
     var RequestClass = function (method, args) {
 
