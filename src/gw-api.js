@@ -188,6 +188,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('smsinvite', '/smsinvite/');
 
+    methods.add('giftCard', '/giftcard/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
