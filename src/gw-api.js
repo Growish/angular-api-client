@@ -190,6 +190,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('giftCard', '/giftcard/');
 
+    methods.add('buyProduct', '/buyproduct/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
