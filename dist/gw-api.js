@@ -1,4 +1,4 @@
-// Compiled Wed Nov 22 2017 14:35:35 GMT+0100 (CET)
+// Compiled Wed Nov 22 2017 15:50:12 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -202,7 +202,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
             return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse);
         };
 
-        this.save = function (body, foo) {
+        this.save = function (body) {
             return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse);
         };
 
@@ -236,6 +236,10 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         var body;
         if(_body && _body.constructor.name === "File")
             body = _body;
+        else if(_body && typeof _body.file !== 'undefined' && _body.file.constructor.name === 'File') {
+            body = angular.copy(_body);
+            body.file = _body.file;
+        }
         else
             body = angular.copy(_body);
 
