@@ -201,7 +201,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse);
         };
 
-        this.save = function (body) {
+        this.save = function (body, foo) {
             return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse);
         };
 
@@ -274,6 +274,18 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
             data = new FormData();
             data.append('0', body);
+
+        }
+        else if(body && typeof body.file !== 'undefined' && body.file.constructor.name === 'File') {
+            headers['Content-Type'] = undefined;
+
+            data = new FormData();
+
+            for (var property in body) {
+                if (body.hasOwnProperty(property)) {
+                    data.append(property, body[property]);
+                }
+            }
 
         }
         else if(body){

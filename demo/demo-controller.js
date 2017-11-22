@@ -149,14 +149,13 @@ app.controller('demoController', function ($scope, gwApi) {
 
     $scope.getFile = function (i) {
         $scope.loader = true;
-        console.log(i);
         gwApi.request('setImageUser', $scope.session.id).save(i).then(
             function success() {
                 $scope.session.imageUrl += "?rand="+ moment().format('X');
                 $scope.loader = false;
             },
             function error() {
-                console.log('errore')
+                console.log('errore');
                 $scope.loader = false;
             }
         );
