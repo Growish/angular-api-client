@@ -1,4 +1,4 @@
-// Compiled Thu Nov 30 2017 17:08:33 GMT+0100 (CET)
+// Compiled Thu Nov 30 2017 17:11:30 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -195,7 +195,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('fbAuth', '/fbauth/');
 
-    methods.add('agencyVisitNotification', /agency-visit-notification/);
+    methods.add('agencyVisitNotification', '/agency-visit-notification/');
 
 
     var RequestClass = function (method, args) {

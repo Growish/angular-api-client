@@ -194,7 +194,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('fbAuth', '/fbauth/');
 
-    methods.add('agencyVisitNotification', /agency-visit-notification/);
+    methods.add('agencyVisitNotification', '/agency-visit-notification/');
 
 
     var RequestClass = function (method, args) {
