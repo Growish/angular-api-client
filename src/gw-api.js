@@ -196,6 +196,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('agencyVisitNotification', '/agency-visit-notification/');
 
+    methods.add('blogPost', '/blog-posts/');
+
 
     var RequestClass = function (method, args) {
 
