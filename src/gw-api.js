@@ -208,6 +208,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('downloadEbook', '/download-ebook/');
 
+    methods.add('feedaty', '/feedaty/');
+
 
     var RequestClass = function (method, args) {
 
