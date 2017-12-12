@@ -1,4 +1,4 @@
-// Compiled Tue Dec 12 2017 12:37:01 GMT+0100 (CET)
+// Compiled Tue Dec 12 2017 16:41:58 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -210,6 +210,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('downloadEbook', '/download-ebook/');
 
     methods.add('feedaty', '/feedaty/');
+
+    methods.add('application', '/application/');
 
 
     var RequestClass = function (method, args) {
