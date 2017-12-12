@@ -204,6 +204,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('saasBusiness', '/saas-business/');
 
+    methods.ass('preUser', '/pre-user/');
+
 
     var RequestClass = function (method, args) {
 

@@ -1,4 +1,4 @@
-// Compiled Tue Dec 12 2017 10:32:17 GMT+0100 (CET)
+// Compiled Tue Dec 12 2017 10:39:32 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -204,6 +204,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('saasPartner', '/saas-partner/');
 
     methods.add('saasBusiness', '/saas-business/');
+
+    methods.ass('preUser', '/pre-user/');
 
 
     var RequestClass = function (method, args) {
