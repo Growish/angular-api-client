@@ -210,6 +210,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('feedaty', '/feedaty/');
 
+    methods.add('application', '/application/');
+
 
     var RequestClass = function (method, args) {
 
