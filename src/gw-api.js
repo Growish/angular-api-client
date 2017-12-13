@@ -198,7 +198,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('blogPost', '/blog-posts/');
 
-    methods.add('userKycAuthentication', '/user-kyc-authentication');
+    methods.add('userKycAuthentication', '/user-kyc-authentication/');
 
     methods.add('saasPartner', '/saas-partner/');
 
