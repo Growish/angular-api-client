@@ -254,14 +254,37 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         var args = angular.copy(_args);
 
         var body;
-        if(_body && _body.constructor.name === "File")
+
+        var headers = [];
+        headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        var data = null;
+
+        if(_body && _body.constructor.name === "File") {
             body = _body;
-        else if(_body && typeof _body.file !== 'undefined' && _body.file.constructor.name === 'File') {
-            body = angular.copy(_body);
-            body.file = _body.file;
+            headers['Content-Type'] = undefined;
+            data = new FormData();
+            data.append('0', body);
         }
-        else
+        else if (_body && verb === 'POST') {
             body = angular.copy(_body);
+
+            headers['Content-Type'] = undefined;
+            data = new FormData();
+            for (var property in body) {
+                if (body.hasOwnProperty(property)) {
+                    if (body[property] && _body[property].constructor.name === "File") {
+                        data.append(property, _body[property]);
+                    } else {
+                        data.append(property, body[property]);
+                    }
+
+                }
+            }
+        }
+        else {
+            body = angular.copy(_body);
+            data = $httpParamSerializerJQLike(body);
+        }
 
 
 
@@ -290,32 +313,30 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         }
 
 
-        var headers = [];
-        headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        var data = null;
 
-        if(body && body.constructor.name === "File") {
-            headers['Content-Type'] = undefined;
 
-            data = new FormData();
-            data.append('0', body);
-
-        }
-        else if(body && typeof body.file !== 'undefined' && body.file.constructor.name === 'File') {
-            headers['Content-Type'] = undefined;
-
-            data = new FormData();
-
-            for (var property in body) {
-                if (body.hasOwnProperty(property)) {
-                    data.append(property, body[property]);
-                }
-            }
-
-        }
-        else if(body){
-            data = $httpParamSerializerJQLike(body);
-        }
+        // if(body && body.constructor.name === "File") {
+        //     headers['Content-Type'] = undefined;
+        //
+        //     data = new FormData();
+        //     data.append('0', body);
+        //
+        // }
+        // else if(body && typeof body.file !== 'undefined' && body.file.constructor.name === 'File') {
+        //     headers['Content-Type'] = undefined;
+        //
+        //     data = new FormData();
+        //
+        //     for (var property in body) {
+        //         if (body.hasOwnProperty(property)) {
+        //             data.append(property, body[property]);
+        //         }
+        //     }
+        //
+        // }
+        // else if(body){
+        //     data = $httpParamSerializerJQLike(body);
+        // }
 
         headers['X-App-Key'] = apiConfig.appKey;
 

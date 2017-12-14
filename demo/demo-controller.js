@@ -16,6 +16,36 @@ app.controller('demoController', function ($scope, gwApi) {
     $scope.withdrawalForm = {};
     $scope.pinRequired = false;
 
+    $scope.kycAuthForm = {
+        occupation: ""
+    };
+
+    $scope.requiredFile = {
+        name: "",
+        image: ""
+    };
+    $scope.optionalFile = {
+        name: "",
+        image: ""
+    };
+
+    $scope.productForm = {
+        walletId: "",
+        name: "",
+        description: "",
+        goalAmount: "",
+        url: "",
+        type: "100",
+        category: "growish",
+        id: ""
+    };
+
+    $scope.product = {
+        name: "",
+        image: ""
+    };
+
+
     gwApi.session().then(
         function (user) {
             $scope.session = user;
@@ -102,6 +132,25 @@ app.controller('demoController', function ($scope, gwApi) {
             function success(userListWallets) {
                 console.log(userListWallets);
                 $scope.userListWallts = userListWallets;
+                $scope.loader = false;
+            },
+            function error() {
+                $scope.loader = false;
+            }
+        );
+
+    };
+
+    $scope.getWallets = function () {
+
+        $scope.loader = true;
+
+        //Session called as atomic function (It does not check token validity)
+        var session = gwApi.session(true);
+
+        gwApi.request('wallets', session.id).read().then(
+            function success(wallets) {
+                $scope.wallets = wallets;
                 $scope.loader = false;
             },
             function error() {
@@ -256,6 +305,78 @@ app.controller('demoController', function ($scope, gwApi) {
                     $scope.pinRequired = true;
                 };
 
+            }
+        )
+    };
+
+    $scope.kycUserAuth = function() {
+        $scope.loader = true;
+        $scope.formError = {};
+        gwApi.request('userKycAuthentication').save({
+            occupation: $scope.kycAuthForm.occupation,
+            requiredFile: $scope.requiredFile.image,
+            optionalFile: $scope.optionalFile.image
+        }).then(
+            function success() {
+                $scope.loader = false;
+                alert('Success!');
+                $scope.kycAuthForm = {
+                    occupation: ""
+                };
+
+                $scope.requiredFile = {
+                    name: "",
+                    image: ""
+                };
+                $scope.optionalFile = {
+                    name: "",
+                    image: ""
+                };
+            },
+            function error(err) {
+                if(err.code === 400)
+                    $scope.formError = err.validationErrors;
+                $scope.loader = false;
+            }
+        )
+    };
+
+    $scope.addNewProduct = function() {
+        $scope.loader = true;
+        $scope.formError = {};
+        gwApi.request('addNewProduct', $scope.productForm.walletId).save({
+            name:  $scope.productForm.name,
+            description:  $scope.productForm.description,
+            goalAmount: $scope.productForm.goalAmount * 100,
+            url: $scope.productForm.url,
+            type: $scope.productForm.type,
+            category: $scope.productForm.category,
+            id: $scope.productForm.id,
+            file: $scope.product.image
+        }).then(
+            function success() {
+                $scope.loader = false;
+                alert('Success!');
+                $scope.productForm = {
+                    walletId: "",
+                    name: "",
+                    description: "",
+                    goalAmount: "",
+                    url: "",
+                    type: "100",
+                    category: "growish",
+                    id: ""
+                };
+
+                $scope.product = {
+                    name: "",
+                    image: ""
+                };
+            },
+            function error(err) {
+                if(err.code === 400)
+                    $scope.formError = err.validationErrors;
+                $scope.loader = false;
             }
         )
     };

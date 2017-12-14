@@ -157,3 +157,32 @@ pre {
 .noty-box a {
     display: block;
 }
+
+div.upload {
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+    color: #3784CC;
+    border: 1px solid #3784CC;
+    cursor: pointer;
+    border-radius: 3px; }
+
+div.upload span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
+    cursor: pointer; }
+
+div.upload input {
+    display: block !important;
+    width: 100% !important;
+    height: 35px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    cursor: pointer; }

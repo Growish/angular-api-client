@@ -14,6 +14,7 @@
     <script src="demo-controller.js" type="application/javascript"></script>
     <script src="statement-mapper.js" type="application/javascript"></script>
     <script src="ng-file-select.js" type="application/javascript"></script>
+    <script src="ng-async-file-select.js" type="application/javascript"></script>
 
 </head>
 
@@ -116,6 +117,47 @@
         <h4>Set image user</h4>
         <img src="{{session.imageUrl}}" alt="">
         <input type="file" ng-file-select="onFileSelect($files)"/>
+    </div>
+
+    <div class="block">
+        <h4> kyc user authentication</h4>
+        <input type="text" ng-model="kycAuthForm.occupation" />
+        <span class="error-label">{{formError.occupation}}</span>
+        <input type="file" ng-file-select-async target="requiredFile.image" name="requiredFile.name" />
+        <span class="error-label">{{formError.requiredFile}}</span>
+        <input type="file" ng-file-select-async target="optionalFile.image" name="optionalFile.name" />
+        <span class="error-label">{{formError.optionalFile}}</span>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="kycUserAuth()">kyc user auth</button>
+    </div>
+
+    <div class="block">
+        <h4>User wallets:</h4>
+        <pre>{{wallets}}</pre>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getWallets()">pull</button>
+    </div>
+
+    <div class="block">
+        <h4>Add Product Wallet</h4>
+
+        <div class="upload">
+            <span ng-if="product.name"><strong>{{product.name}}</strong></span>
+            <span ng-if="!product.name">add image</span>
+            <input type="file" ng-file-select-async target="product.image" name="product.name"/>
+        </div>
+        <p class="error-label">{{formError.file}}</p>
+        <input type="text" ng-model="productForm.walletId" placeholder="id wallet"/>
+        <span class="error-label">{{formError.walletId}}</span>
+        <input type="text" ng-model="productForm.name" placeholder="name"/>
+        <span class="error-label">{{formError.name}}</span>
+        <input type="text" ng-model="productForm.description" placeholder="description" />
+        <span class="error-label">{{formError.description}}</span>
+        <input type="text" ng-model="productForm.goalAmount" placeholder="goal amount" />
+        <span class="error-label">{{formError.goalAmount}}</span>
+        <input type="text" ng-model="productForm.url" placeholder="url" />
+        <span class="error-label">{{formError.url}}</span>
+        <input type="hidden" ng-model="productForm.type" />
+        <input type="hidden" ng-model="productForm.category" />
+        <button class="btn btn-lg btn-primary btn-block" ng-click="addNewProduct()">PUSH</button>
     </div>
 
     <div class="block statement">
