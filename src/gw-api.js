@@ -295,7 +295,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         var endPoint = method.getEndPoint(args, urlParams);
 
         if (body && method.mapper.out)
-            body = method.mapper.out(body);
+            data = method.mapper.out(body);
 
         if (method.seed) {
             debugMsg('Resolving ' + endPoint + ' from seed');
@@ -311,32 +311,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
             return deferred.promise;
         }
-
-
-
-
-        // if(body && body.constructor.name === "File") {
-        //     headers['Content-Type'] = undefined;
-        //
-        //     data = new FormData();
-        //     data.append('0', body);
-        //
-        // }
-        // else if(body && typeof body.file !== 'undefined' && body.file.constructor.name === 'File') {
-        //     headers['Content-Type'] = undefined;
-        //
-        //     data = new FormData();
-        //
-        //     for (var property in body) {
-        //         if (body.hasOwnProperty(property)) {
-        //             data.append(property, body[property]);
-        //         }
-        //     }
-        //
-        // }
-        // else if(body){
-        //     data = $httpParamSerializerJQLike(body);
-        // }
 
         headers['X-App-Key'] = apiConfig.appKey;
 

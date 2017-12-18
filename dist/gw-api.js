@@ -1,4 +1,4 @@
-// Compiled Thu Dec 14 2017 11:02:55 GMT+0100 (CET)
+// Compiled Mon Dec 18 2017 12:05:27 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -296,7 +296,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         var endPoint = method.getEndPoint(args, urlParams);
 
         if (body && method.mapper.out)
-            body = method.mapper.out(body);
+            data = method.mapper.out(body);
 
         if (method.seed) {
             debugMsg('Resolving ' + endPoint + ' from seed');
@@ -312,32 +312,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
             return deferred.promise;
         }
-
-
-
-
-        // if(body && body.constructor.name === "File") {
-        //     headers['Content-Type'] = undefined;
-        //
-        //     data = new FormData();
-        //     data.append('0', body);
-        //
-        // }
-        // else if(body && typeof body.file !== 'undefined' && body.file.constructor.name === 'File') {
-        //     headers['Content-Type'] = undefined;
-        //
-        //     data = new FormData();
-        //
-        //     for (var property in body) {
-        //         if (body.hasOwnProperty(property)) {
-        //             data.append(property, body[property]);
-        //         }
-        //     }
-        //
-        // }
-        // else if(body){
-        //     data = $httpParamSerializerJQLike(body);
-        // }
 
         headers['X-App-Key'] = apiConfig.appKey;
 
