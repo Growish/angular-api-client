@@ -254,50 +254,24 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         var args = angular.copy(_args);
 
         var body;
-
-        var headers = [];
-        headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        var data = null;
-
         if(_body && _body.constructor.name === "File") {
             body = _body;
-            headers['Content-Type'] = undefined;
-            data = new FormData();
-            data.append('0', body);
         }
         else if (_body && verb === 'POST') {
             body = angular.copy(_body);
-
-            if (method.mapper.out)
-                body = method.mapper.out(body);
-
-            headers['Content-Type'] = undefined;
-            data = new FormData();
-            for (var property in body) {
-                if (body.hasOwnProperty(property)) {
-                    if (body[property] && _body[property].constructor.name === "File") {
-                        data.append(property, _body[property]);
-                    } else {
-                        data.append(property, body[property]);
-                    }
-
-                }
-            }
         }
         else {
             body = angular.copy(_body);
-            if (method.mapper.out)
-                body = method.mapper.out(body);
-            data = $httpParamSerializerJQLike(body);
         }
-
-
 
         var urlParams = angular.copy(_urlParams);
 
         var deferred = $q.defer();
 
         var endPoint = method.getEndPoint(args, urlParams);
+
+        if (body && method.mapper.out)
+            body = method.mapper.out(body);
 
         if (method.seed) {
             debugMsg('Resolving ' + endPoint + ' from seed');
@@ -315,30 +289,35 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         }
 
 
+        var headers = [];
+        headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        var data = null;
 
+        if(body && body.constructor.name === "File") {
+            headers['Content-Type'] = undefined;
 
-        // if(body && body.constructor.name === "File") {
-        //     headers['Content-Type'] = undefined;
-        //
-        //     data = new FormData();
-        //     data.append('0', body);
-        //
-        // }
-        // else if(body && typeof body.file !== 'undefined' && body.file.constructor.name === 'File') {
-        //     headers['Content-Type'] = undefined;
-        //
-        //     data = new FormData();
-        //
-        //     for (var property in body) {
-        //         if (body.hasOwnProperty(property)) {
-        //             data.append(property, body[property]);
-        //         }
-        //     }
-        //
-        // }
-        // else if(body){
-        //     data = $httpParamSerializerJQLike(body);
-        // }
+            data = new FormData();
+            data.append('0', body);
+
+        }
+        else if(body && verb === 'POST') {
+            headers['Content-Type'] = undefined;
+            data = new FormData();
+            for (var property in body) {
+                if (body.hasOwnProperty(property)) {
+                    if (body[property] && _body[property].constructor.name === "File") {
+                        data.append(property, _body[property]);
+                    } else {
+                        data.append(property, body[property]);
+                    }
+
+                }
+            }
+
+        }
+        else if(body){
+            data = $httpParamSerializerJQLike(body);
+        }
 
         headers['X-App-Key'] = apiConfig.appKey;
 
