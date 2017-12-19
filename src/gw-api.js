@@ -307,7 +307,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
                 if (body.hasOwnProperty(property)) {
                     if (body[property] && _body[property].constructor.name === "File") {
                         data.append(property, _body[property]);
-                    } else {
+                    } else if (typeof body[property] !== 'undefined') {
                         data.append(property, body[property]);
                     }
 

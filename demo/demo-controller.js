@@ -12,7 +12,11 @@ app.controller('demoController', function ($scope, gwApi) {
     $scope.lostPasswordForm = {
         email: ''
     };
-    $scope.beneficiary = {};
+    $scope.beneficiary = {
+        // bankAccountIBAN: "",
+        // bankAccountOwnerAddress: '',
+        // bankAccountOwnerName: ''
+    };
     $scope.withdrawalForm = {};
     $scope.pinRequired = false;
 

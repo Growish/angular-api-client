@@ -1,4 +1,4 @@
-// Compiled Mon Dec 18 2017 12:19:35 GMT+0100 (CET)
+// Compiled Tue Dec 19 2017 10:09:44 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -308,7 +308,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
                 if (body.hasOwnProperty(property)) {
                     if (body[property] && _body[property].constructor.name === "File") {
                         data.append(property, _body[property]);
-                    } else {
+                    } else if (typeof body[property] !== 'undefined') {
                         data.append(property, body[property]);
                     }
 
