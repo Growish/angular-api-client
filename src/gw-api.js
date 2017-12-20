@@ -214,6 +214,10 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('agency', '/agency/{0}/');
 
+    methods.add('searchList', '/list/');
+
+    methods.add('agencySearchList', '/agency/{0}/list/')
+
 
     var RequestClass = function (method, args) {
 
