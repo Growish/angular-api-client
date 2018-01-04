@@ -222,6 +222,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('listMessage', '/list/{0}/message/');
 
+    methods.add('fastAssistance', '/fastassistance/');
+
 
     var RequestClass = function (method, args) {
 
