@@ -220,6 +220,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('rsvp', '/list/{0}/rsvp/');
 
+    methods.add('listMessage', '/list/{0}/message/');
+
 
     var RequestClass = function (method, args) {
 
