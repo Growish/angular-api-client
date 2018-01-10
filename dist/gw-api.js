@@ -1,4 +1,4 @@
-// Compiled Thu Jan 04 2018 17:54:32 GMT+0100 (CET)
+// Compiled Wed Jan 10 2018 15:47:12 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -227,7 +227,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('onDemandHelp', '/ondemandhelp/?mode=info');
 
-
+    methods.add('getPdfStatement', '/pdf-statement/{0}');
 
 
     var RequestClass = function (method, args) {
