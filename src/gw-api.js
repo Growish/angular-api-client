@@ -226,7 +226,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('onDemandHelp', '/ondemandhelp/?mode=info');
 
-    methods.add('getPdfStatement', '/pdf-statement/{0}');
+    methods.add('getPdfStatement', '//pdf-statement/{0}');
 
 
     var RequestClass = function (method, args) {
