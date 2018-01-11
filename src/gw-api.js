@@ -240,6 +240,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('deletePeople', '/delete-people/');
 
+    methods.add('sendAdminMessage', '/admin_msg/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
