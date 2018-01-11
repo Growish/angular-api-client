@@ -246,6 +246,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('premiumProductSold', '/premium-product-sold/');
 
+    methods.add('updateTable', '/list/{0}/table/{1}/');
+
 
     var RequestClass = function (method, args) {
 
