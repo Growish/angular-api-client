@@ -1,4 +1,4 @@
-// Compiled Thu Jan 11 2018 11:50:45 GMT+0100 (CET)
+// Compiled Thu Jan 11 2018 12:16:29 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -246,6 +246,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('weddingPremiumProducts', '/premium-products/?catalog=listanozze');
 
     methods.add('premiumProductSold', '/premium-product-sold/');
+
+    methods.add('updateTable', '/list/{0}/table/{1}/');
 
 
     var RequestClass = function (method, args) {
