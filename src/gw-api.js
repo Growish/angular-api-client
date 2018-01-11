@@ -260,6 +260,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('walletProductPosition', '/wallet-product-position/{0}/');
 
+    methods.add('listDelete', '/listdelete/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
