@@ -258,6 +258,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('pdfMessage', '/list/{0}/pdf-message/');
 
+    methods.add('walletProductPosition', '/wallet-product-position/{0}/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
