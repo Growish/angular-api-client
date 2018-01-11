@@ -236,6 +236,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('setGuest', '/list/{0}/guest/');
 
+    methods.add('requestRsvp', '/rsvp/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
