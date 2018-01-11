@@ -1,4 +1,4 @@
-// Compiled Thu Jan 11 2018 13:05:08 GMT+0100 (CET)
+// Compiled Thu Jan 11 2018 14:42:18 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -255,6 +255,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     methods.add('updateToDo', '/list/{0}/todo/{1}/');
 
+    methods.add('lastBeneficiary', '/lastbeneficiary/{0}/');
 
     var RequestClass = function (method, args) {
 
