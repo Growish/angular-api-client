@@ -1,4 +1,4 @@
-// Compiled Thu Jan 11 2018 11:25:49 GMT+0100 (CET)
+// Compiled Thu Jan 11 2018 11:36:36 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -242,6 +242,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('deletePeople', '/delete-people/');
 
     methods.add('sendAdminMessage', '/admin_msg/');
+
+    methods.add('premiumProducts', '/premium-products/');
 
     var RequestClass = function (method, args) {
 

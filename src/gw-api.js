@@ -242,6 +242,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('sendAdminMessage', '/admin_msg/');
 
+    methods.add('premiumProducts', '/premium-products/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
