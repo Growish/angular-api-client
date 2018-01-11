@@ -228,6 +228,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('getPdfStatement', '/pdf-statement/{0}/');
 
+    methods.add('changeRsvp', '/changersvp/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
