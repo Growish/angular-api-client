@@ -250,6 +250,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('updateTable', '/list/{0}/table/{1}/');
 
+    methods.add('toDo', '/list/{0}/todo/');
+
 
     var RequestClass = function (method, args) {
 
