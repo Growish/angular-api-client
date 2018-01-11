@@ -1,4 +1,4 @@
-// Compiled Thu Jan 11 2018 10:31:03 GMT+0100 (CET)
+// Compiled Thu Jan 11 2018 10:44:05 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -230,6 +230,10 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('getPdfStatement', '/pdf-statement/{0}/');
 
     methods.add('changeRsvp', '/changersvp/');
+
+    methods.add('unseatUser', '/unseatuser/');
+
+    methods.add('seatUser', '/seatuser/');
 
     var RequestClass = function (method, args) {
 

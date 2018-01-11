@@ -230,6 +230,10 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('changeRsvp', '/changersvp/');
 
+    methods.add('unseatUser', '/unseatuser/');
+
+    methods.add('seatUser', '/seatuser/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
