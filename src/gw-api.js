@@ -262,6 +262,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('listDelete', '/listdelete/');
 
+    methods.add('list.image', '/list/{0}/image/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
