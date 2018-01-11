@@ -234,6 +234,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('seatUser', '/seatuser/');
 
+    methods.add('setGuest', '/list/{0}/guest/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
