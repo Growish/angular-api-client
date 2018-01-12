@@ -1,8 +1,10 @@
-angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
+angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
 
     var me = this;
 
     var initialized = false;
+
+    var $httpDefaultCache = $cacheFactory.get('$http');
 
     var devBaseUrl = 'https://apidev.growish.com/v1';
     var prodBaseUrl = 'https://api.growish.com/v1';
@@ -106,7 +108,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     //http://growish.github.io/api-doc/#api-User-updateCreditCard
     methods.add('user.creditCard', '/user/{0}/credit-card/');
-
 
     //http://growish.github.io/api-doc/#api-parserExcel-parserExcel
     methods.add('parserExcel', '/parserexcel/');
@@ -387,13 +388,15 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             transformRequest: angular.identity
         };
 
-        if(verb === 'GET' && cacheManager.inCache(httpOptions.url)) {
-            httpOptions.cache = true;
-            debugMsg('Pulling ' + httpOptions.url + ' from cache');
+        if(verb === 'GET' && cacheManager.inCache(httpOptions.url) === 'expired') {
+            $httpDefaultCache.remove(httpOptions.url);
+            debugMsg('Dropping cache for ' + httpOptions.url);
         }
 
         if(cache) {
             cacheManager.add(httpOptions.url, cache);
+            httpOptions.cache = true;
+            debugMsg('Caching ' + httpOptions.url);
         }
 
         debugMsg(httpOptions);
@@ -626,11 +629,11 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             if(x >= 0) {
                 if (!_cachedUrl[x].expire || _cachedUrl[x].expire <= now) {
                     _cachedUrl[x].expire = null;
-                    return false;
+                    return 'expired';
                 }
-                return true;
+                return 'cached';
             }
-            return false;
+            return null;
         };
 
         this.add = function (url, time) {

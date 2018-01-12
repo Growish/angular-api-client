@@ -112,7 +112,7 @@ app.controller('demoController', function ($scope, gwApi) {
         //Session called as promise (it checks token validity every time)
         gwApi.session().then(
             function success(session) {
-                return gwApi.request('user', session.id).read();
+                return gwApi.request('user', session.id).read({}, 5);
             }
         ).then(
             function success(user) {
