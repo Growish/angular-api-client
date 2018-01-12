@@ -264,6 +264,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('list.image', '/list/{0}/image/');
 
+    methods.add('setListProduct', '/list/{0}/product/');
+
     var RequestClass = function (method, args) {
 
         var me = this;

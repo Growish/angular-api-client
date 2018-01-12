@@ -1,4 +1,4 @@
-// Compiled Thu Jan 11 2018 17:13:30 GMT+0100 (CET)
+// Compiled Fri Jan 12 2018 10:25:30 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', function ($q, $http, $timeout, $httpParamSerializerJQLike) {
 
     var me = this;
@@ -264,6 +264,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('listDelete', '/listdelete/');
 
     methods.add('list.image', '/list/{0}/image/');
+
+    methods.add('setListProduct', '/list/{0}/product/');
 
     var RequestClass = function (method, args) {
 
