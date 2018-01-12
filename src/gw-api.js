@@ -267,6 +267,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('setListProduct', '/list/{0}/product/');
 
+    methods.add('accessAuth', '//auth/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
