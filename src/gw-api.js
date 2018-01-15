@@ -267,7 +267,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('setListProduct', '/list/{0}/product/');
 
-    methods.add('accessAuth', '//auth/');
+    methods.add('agencyamount', '/agencyamount/');
 
     var RequestClass = function (method, args) {
 
