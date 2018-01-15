@@ -1,4 +1,4 @@
-// Compiled Mon Jan 15 2018 11:53:39 GMT+0100 (CET)
+// Compiled Mon Jan 15 2018 14:15:46 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
 
     var me = this;
@@ -605,6 +605,12 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
         method.mapper = mapper;
 
+    };
+
+    this.clearCache = function () {
+        console.log($httpDefaultCache.info());
+        $httpDefaultCache.removeAll();
+        console.log($httpDefaultCache.info());
     };
 
     var CacheClass = function () {

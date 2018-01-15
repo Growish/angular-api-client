@@ -98,7 +98,11 @@ app.controller('demoController', function ($scope, gwApi) {
         );
     };
 
-    $scope.getUser = function () {
+    $scope.clearCache = function () {
+        gwApi.clearCache();
+    };
+
+    $scope.getUser = function (cache) {
 
         $scope.loader = true;
 
@@ -112,7 +116,7 @@ app.controller('demoController', function ($scope, gwApi) {
         //Session called as promise (it checks token validity every time)
         gwApi.session().then(
             function success(session) {
-                return gwApi.request('user', session.id).read({}, 5);
+                return gwApi.request('user', session.id).read({}, (cache) ? 20 : null); //cache for 20 seconds if 'cache' is passed
             }
         ).then(
             function success(user) {

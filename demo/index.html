@@ -62,7 +62,9 @@
     <div class="block">
         <h4>User:</h4>
         <pre>{{user}}</pre>
-        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getUser()">pull</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getUser()">pull normal</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="getUser('cache')">pull with cache</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="clearCache()">clear cache</button>
     </div>
 
     <div class="block">

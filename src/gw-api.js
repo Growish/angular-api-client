@@ -606,6 +606,12 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     };
 
+    this.clearCache = function () {
+        console.log($httpDefaultCache.info());
+        $httpDefaultCache.removeAll();
+        console.log($httpDefaultCache.info());
+    };
+
     var CacheClass = function () {
 
         var _cachedUrl = [];
