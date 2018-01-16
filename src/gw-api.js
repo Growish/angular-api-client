@@ -271,7 +271,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('setGuests', '/list/{0}/guests/');
 
-    methods.add('setProductImage', '/list/{0}/product/{1}/image');
+    methods.add('setProductImage', '/list/{0}/product/{1}/image/');
 
     var RequestClass = function (method, args) {
 
