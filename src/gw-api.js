@@ -396,8 +396,11 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             $httpDefaultCache.remove(httpOptions.url);
             debugMsg('Dropping cache for ' + httpOptions.url);
         }
-
-        if(cache) {
+        else if(verb === 'GET' && cacheManager.inCache(httpOptions.url) === 'cached') {
+            httpOptions.cache = true;
+            debugMsg('Cache found for ' + httpOptions.url);
+        }
+        else if(verb === 'GET' && cache) {
             cacheManager.add(httpOptions.url, cache);
             httpOptions.cache = true;
             debugMsg('Caching ' + httpOptions.url);
@@ -638,7 +641,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
             if(x >= 0) {
                 if (!_cachedUrl[x].expire || _cachedUrl[x].expire <= now) {
-                    _cachedUrl[x].expire = null;
+                    _cachedUrl.splice(x,1);
                     return 'expired';
                 }
                 return 'cached';

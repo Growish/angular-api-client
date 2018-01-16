@@ -1,4 +1,4 @@
-// Compiled Mon Jan 15 2018 16:18:37 GMT+0100 (CET)
+// Compiled Tue Jan 16 2018 12:27:50 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
 
     var me = this;
@@ -397,8 +397,11 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
             $httpDefaultCache.remove(httpOptions.url);
             debugMsg('Dropping cache for ' + httpOptions.url);
         }
-
-        if(cache) {
+        else if(verb === 'GET' && cacheManager.inCache(httpOptions.url) === 'cached') {
+            httpOptions.cache = true;
+            debugMsg('Cache found for ' + httpOptions.url);
+        }
+        else if(verb === 'GET' && cache) {
             cacheManager.add(httpOptions.url, cache);
             httpOptions.cache = true;
             debugMsg('Caching ' + httpOptions.url);
@@ -639,7 +642,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
             if(x >= 0) {
                 if (!_cachedUrl[x].expire || _cachedUrl[x].expire <= now) {
-                    _cachedUrl[x].expire = null;
+                    _cachedUrl.splice(x,1);
                     return 'expired';
                 }
                 return 'cached';
