@@ -283,6 +283,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('cart.product', '/cart/{0}/product/{1}/');
 
+    methods.add('buyPremiumProducts', '/buy-premium-products/{0}/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
