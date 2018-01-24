@@ -1,4 +1,4 @@
-// Compiled Wed Jan 17 2018 11:22:47 GMT+0100 (CET)
+// Compiled Wed Jan 24 2018 17:50:06 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
 
     var me = this;
@@ -287,6 +287,8 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     methods.add('buyPremiumProducts', '/buy-premium-products/{0}/');
 
     methods.add('cart.voucher', '/cart/{0}/voucher/');
+
+    methods.add('product.comment', '/list/{0}/product/{1}/comment');
 
     var RequestClass = function (method, args) {
 
