@@ -143,6 +143,8 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     methods.add('cardContribution', '/card_contribution/');
 
+    methods.add('cashContribution', '/cash_contribution/');
+
     methods.add('withdrawalContribution', '/withdrawal_contribution/');
 
     methods.add('walletComment', '/wallet/{0}/comment/');
