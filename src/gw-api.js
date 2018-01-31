@@ -507,6 +507,29 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         localStorage.setItem(apiConfig.localStorageFile, angular.toJson(user));
     };
 
+    this.restoreSession = function (userId, token) {
+
+        session = {
+            id: userId,
+            token: token
+        };
+
+        var deferred = $q.defer();
+
+        me.request('user', session.id).read().then(
+            function success(user) {
+                me.setSession(user);
+                deferred.resolve(user);
+            },
+            function error() {
+                me.dropSession();
+                deferred.reject();
+            }
+        );
+
+        return deferred.promise;
+    };
+
     this.session = function (i) {
         if (typeof i !== "undefined" && i) {
             return session;
