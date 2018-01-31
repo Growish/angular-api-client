@@ -518,7 +518,14 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
         me.request('user', session.id).read().then(
             function success(user) {
-                me.setSession(user);
+                me.setSession({
+                    token: token,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    birthday: user.birthday,
+                    taxCode: user.taxCode,
+                    imageUrl: user.imageUrl
+                });
                 deferred.resolve(user);
             },
             function error() {
@@ -528,7 +535,6 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         );
 
         return deferred.promise;
-
     };
 
     this.session = function (i) {

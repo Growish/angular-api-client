@@ -1,4 +1,4 @@
-// Compiled Wed Jan 31 2018 12:24:33 GMT+0100 (CET)
+// Compiled Wed Jan 31 2018 12:25:45 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
 
     var me = this;
@@ -519,7 +519,14 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
         me.request('user', session.id).read().then(
             function success(user) {
-                me.setSession(user);
+                me.setSession({
+                    token: token,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    birthday: user.birthday,
+                    taxCode: user.taxCode,
+                    imageUrl: user.imageUrl
+                });
                 deferred.resolve(user);
             },
             function error() {
@@ -529,7 +536,6 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         );
 
         return deferred.promise;
-
     };
 
     this.session = function (i) {
