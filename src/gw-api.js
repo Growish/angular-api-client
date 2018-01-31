@@ -528,6 +528,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         );
 
         return deferred.promise;
+
     };
 
     this.session = function (i) {

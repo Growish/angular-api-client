@@ -1,4 +1,4 @@
-// Compiled Wed Jan 31 2018 12:20:30 GMT+0100 (CET)
+// Compiled Wed Jan 31 2018 12:24:33 GMT+0100 (CET)
 angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
 
     var me = this;
@@ -529,6 +529,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         );
 
         return deferred.promise;
+
     };
 
     this.session = function (i) {
