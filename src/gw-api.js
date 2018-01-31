@@ -1,4 +1,4 @@
-angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
+angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory, $cookies, $location, gwApiHelper) {
 
     var me = this;
 
@@ -15,11 +15,63 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         env: 'developing',
         baseUrl: devBaseUrl,
         preserveUserSession: true,
-        localStorageFile: 'gw-api-data'
+        localStorageFile: 'gw-api-data',
+        useCookies: false
     };
 
 
     var apiConfig = {};
+
+    var ApiStorageClass = function () {
+
+        var cookieOptions = { path: '/', domain:  gwApiHelper.isIp($location.host()) ? $location.host() : "." + $location.host() };
+
+        this.save = function (value) {
+            if(!apiConfig.useCookies)
+                localStorage.setItem(apiConfig.localStorageFile, value);
+            else {
+                var elObj = JSON.parse(value);
+                $cookies.put('api-id', elObj.id, cookieOptions);
+                $cookies.put('api-token', elObj.token, cookieOptions);
+                $cookies.put('api-user', window.btoa(value), cookieOptions);
+            }
+        };
+
+        this.remove = function () {
+            if(!apiConfig.useCookies)
+                localStorage.removeItem(apiConfig.localStorageFile);
+            else {
+
+                $cookies.remove('api-id', cookieOptions);
+                $cookies.remove('api-token', cookieOptions);
+                $cookies.remove('api-user', cookieOptions);
+
+            }
+        };
+
+        this.get = function () {
+            if(!apiConfig.useCookies)
+                return localStorage.getItem(apiConfig.localStorageFile);
+            else {
+
+                var userId = $cookies.get('api-id', cookieOptions);
+                var token  = $cookies.get('api-token', cookieOptions);
+                var user   = $cookies.get('api-user', cookieOptions);
+
+                if(typeof userId === 'undefined' || typeof token === 'undefined' || typeof user === 'undefined')
+                    return null;
+
+                user       = JSON.parse(window.atob(user));
+                user.token = token;
+                user.id    = userId;
+
+                return user;
+            }
+        };
+
+    };
+
+    var apiStorage = new ApiStorageClass();
 
     this.getBaseUrl = function () {
         return apiConfig.baseUrl;
@@ -490,7 +542,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
 
     var dropSession = function () {
         session = null;
-        localStorage.removeItem(apiConfig.localStorageFile);
+        apiStorage.remove();
     };
 
     this.updateSession = function (user) {
@@ -499,12 +551,12 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
         session.birthday = user.birthday;
         session.taxCode = user.taxCode;
 
-        localStorage.setItem(apiConfig.localStorageFile, angular.toJson(session));
+        apiStorage.save(angular.toJson(session));
     };
 
     this.setSession = function (user) {
         session = user;
-        localStorage.setItem(apiConfig.localStorageFile, angular.toJson(user));
+        apiStorage.save(angular.toJson(user));
     };
 
     this.restoreSession = function (userId, token) {
@@ -548,7 +600,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
             deferred.resolve(session);
         }
         else {
-            var _session = localStorage.getItem(apiConfig.localStorageFile);
+            var _session = apiStorage.get();
             if (_session)
                 _session = angular.fromJson(_session);
 
@@ -561,7 +613,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
                     },
                     function error() {
                         debugMsg('Session found in local storage but invalidated in API');
-                        localStorage.removeItem(apiConfig.localStorageFile);
+                        apiStorage.remove();
                         deferred.reject();
                     }
                 );
@@ -662,9 +714,7 @@ angular.module('gwApiClient', []).service('gwApi', function ($q, $http, $timeout
     };
 
     this.clearCache = function () {
-        console.log($httpDefaultCache.info());
         $httpDefaultCache.removeAll();
-        console.log($httpDefaultCache.info());
     };
 
     var CacheClass = function () {

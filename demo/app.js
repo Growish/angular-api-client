@@ -8,7 +8,8 @@ var app = angular.module('demo', ['gwApiClient']).run(function (gwApi, statement
         },
         error403: function (response) {
             alert(response.message);
-        }
+        },
+        useCookies: true
     });
 
     gwApi.addMapper('listWallet.statement', statementMapper);

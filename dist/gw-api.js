@@ -1,5 +1,6 @@
-// Compiled Wed Jan 31 2018 12:25:45 GMT+0100 (CET)
-angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', function ($q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory) {
+// Compiled Wed Jan 31 2018 14:34:26 GMT+0100 (CET)
+!function(a,b){"use strict";function c(a,c,d){function g(a,d,f){var g,h;f=f||{},h=f.expires,g=b.isDefined(f.path)?f.path:e,b.isUndefined(d)&&(h="Thu, 01 Jan 1970 00:00:00 GMT",d=""),b.isString(h)&&(h=new Date(h));var i=encodeURIComponent(a)+"="+encodeURIComponent(d);i+=g?";path="+g:"",i+=f.domain?";domain="+f.domain:"",i+=h?";expires="+h.toUTCString():"",i+=f.secure?";secure":"";var j=i.length+1;return j>4096&&c.warn("Cookie '"+a+"' possibly not set or overflowed because it was too large ("+j+" > 4096 bytes)!"),i}var e=d.baseHref(),f=a[0];return function(a,b,c){f.cookie=g(a,b,c)}}b.module("ngCookies",["ng"]).provider("$cookies",[function(){function d(a){return a?b.extend({},c,a):c}var c=this.defaults={};this.$get=["$$cookieReader","$$cookieWriter",function(a,c){return{get:function(b){return a()[b]},getObject:function(a){var c=this.get(a);return c?b.fromJson(c):c},getAll:function(){return a()},put:function(a,b,e){c(a,b,d(e))},putObject:function(a,c,d){this.put(a,b.toJson(c),d)},remove:function(a,b){c(a,void 0,d(b))}}}]}]),b.module("ngCookies").factory("$cookieStore",["$cookies",function(a){return{get:function(b){return a.getObject(b)},put:function(b,c){a.putObject(b,c)},remove:function(b){a.remove(b)}}}]),c.$inject=["$document","$log","$browser"],b.module("ngCookies").provider("$$cookieWriter",function(){this.$get=c})}(window,window.angular);
+angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', '$cookies', '$location', 'gwApiHelper', function ( $q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory, $cookies, $location, gwApiHelper) {
 
     var me = this;
 
@@ -16,11 +17,63 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         env: 'developing',
         baseUrl: devBaseUrl,
         preserveUserSession: true,
-        localStorageFile: 'gw-api-data'
+        localStorageFile: 'gw-api-data',
+        useCookies: false
     };
 
 
     var apiConfig = {};
+
+    var ApiStorageClass = function () {
+
+        var cookieOptions = { path: '/', domain:  gwApiHelper.isIp($location.host()) ? $location.host() : "." + $location.host() };
+
+        this.save = function (value) {
+            if(!apiConfig.useCookies)
+                localStorage.setItem(apiConfig.localStorageFile, value);
+            else {
+                var elObj = JSON.parse(value);
+                $cookies.put('api-id', elObj.id, cookieOptions);
+                $cookies.put('api-token', elObj.token, cookieOptions);
+                $cookies.put('api-user', window.btoa(value), cookieOptions);
+            }
+        };
+
+        this.remove = function () {
+            if(!apiConfig.useCookies)
+                localStorage.removeItem(apiConfig.localStorageFile);
+            else {
+
+                $cookies.remove('api-id', cookieOptions);
+                $cookies.remove('api-token', cookieOptions);
+                $cookies.remove('api-user', cookieOptions);
+
+            }
+        };
+
+        this.get = function () {
+            if(!apiConfig.useCookies)
+                return localStorage.getItem(apiConfig.localStorageFile);
+            else {
+
+                var userId = $cookies.get('api-id', cookieOptions);
+                var token  = $cookies.get('api-token', cookieOptions);
+                var user   = $cookies.get('api-user', cookieOptions);
+
+                if(typeof userId === 'undefined' || typeof token === 'undefined' || typeof user === 'undefined')
+                    return null;
+
+                user       = JSON.parse(window.atob(user));
+                user.token = token;
+                user.id    = userId;
+
+                return user;
+            }
+        };
+
+    };
+
+    var apiStorage = new ApiStorageClass();
 
     this.getBaseUrl = function () {
         return apiConfig.baseUrl;
@@ -491,7 +544,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
 
     var dropSession = function () {
         session = null;
-        localStorage.removeItem(apiConfig.localStorageFile);
+        apiStorage.remove();
     };
 
     this.updateSession = function (user) {
@@ -500,12 +553,12 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
         session.birthday = user.birthday;
         session.taxCode = user.taxCode;
 
-        localStorage.setItem(apiConfig.localStorageFile, angular.toJson(session));
+        apiStorage.save(angular.toJson(session));
     };
 
     this.setSession = function (user) {
         session = user;
-        localStorage.setItem(apiConfig.localStorageFile, angular.toJson(user));
+        apiStorage.save(angular.toJson(user));
     };
 
     this.restoreSession = function (userId, token) {
@@ -549,7 +602,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
             deferred.resolve(session);
         }
         else {
-            var _session = localStorage.getItem(apiConfig.localStorageFile);
+            var _session = apiStorage.get();
             if (_session)
                 _session = angular.fromJson(_session);
 
@@ -562,7 +615,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
                     },
                     function error() {
                         debugMsg('Session found in local storage but invalidated in API');
-                        localStorage.removeItem(apiConfig.localStorageFile);
+                        apiStorage.remove();
                         deferred.reject();
                     }
                 );
@@ -663,9 +716,7 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     };
 
     this.clearCache = function () {
-        console.log($httpDefaultCache.info());
         $httpDefaultCache.removeAll();
-        console.log($httpDefaultCache.info());
     };
 
     var CacheClass = function () {
@@ -738,3 +789,10 @@ angular.module('gwApiClient', []).service('gwApi', ['$q', '$http', '$timeout', '
     };
 
 }]);
+angular.module('gwApiClient').service('gwApiHelper', function () {
+
+    this.isIp = function (value) {
+        return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(value);
+    }
+
+});

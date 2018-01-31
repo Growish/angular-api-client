@@ -8,6 +8,7 @@ module.exports = function(grunt) {
             app1: {
                 files: {
                     'dist/gw-api.js': [
+                        'lib/*.js',
                         'src/*.js'
                     ]
                 }
