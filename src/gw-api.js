@@ -24,7 +24,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     var ApiStorageClass = function () {
 
-        var cookieOptions = { path: '/', domain:  gwApiHelper.isIp($location.host()) ? $location.host() : "." + $location.host() };
+        var cookieOptions = { path: '/', domain:  gwApiHelper.isIp($location.host()) ? $location.host() : "." + gwApiHelper.removeSubdomain($location.host()) };
 
         this.save = function (value) {
             if(!apiConfig.useCookies)
