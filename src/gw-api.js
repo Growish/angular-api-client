@@ -297,7 +297,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('sendAdminMessage', '/admin_msg/');
 
-    methods.add('weddingPremiumProducts', '/premium-products/?catalog=listanozze');
+    methods.add('weddingPremiumProducts', '/premium-products/');
 
     methods.add('premiumProductSold', '/premium-product-sold/');
 
