@@ -345,11 +345,13 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('list.quiz', '/list/{0}/quiz/');
 
-    methods.add('list.quiz-answers', '/list/{0}/quiz-answers/');
+    methods.add('list.editQuiz', '/list/{0}/quiz/{1}/');
 
-    methods.add('quiz.addQuestion', '/quiz/{0}/question/');
+    methods.add('list.quizAnswers', '/list/{0}/quiz-answers/');
 
-    methods.add('quiz.question', '/quiz/{1}/question/{1}/');
+    methods.add('quiz.newQuestion', '/quiz/{0}/question/');
+
+    methods.add('quiz.question', '/quiz/{0}/question/{1}/');
 
 
 
