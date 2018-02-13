@@ -355,7 +355,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('quizRanking', '/quiz-ranking/{0}/');
 
-
+    methods.add('quizQuestionPosition', '/quiz-question-position/{0}/');
 
     var RequestClass = function (method, args) {
 
