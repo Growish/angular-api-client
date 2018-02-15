@@ -361,25 +361,31 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
         var me = this;
         var fullResponse = false;
+        var onlyLocalError = false;
 
         this.read = function (urlParams, cache) {
-            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse);
+            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse, onlyLocalError);
         };
 
         this.save = function (body) {
-            return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse);
+            return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse, onlyLocalError);
         };
 
         this.update = function (body) {
-            return new ServerCallPromise(method, args, body, 'PUT', null, null, fullResponse);
+            return new ServerCallPromise(method, args, body, 'PUT', null, null, fullResponse, onlyLocalError);
         };
 
         this.delete = function () {
-            return new ServerCallPromise(method, args, null, 'DELETE', null, null, fullResponse);
+            return new ServerCallPromise(method, args, null, 'DELETE', null, null, fullResponse, onlyLocalError);
         };
 
         this.setFullResponse = function () {
             fullResponse = true;
+            return me;
+        };
+
+        this.onlyLocalError = function () {
+            onlyLocalError = true;
             return me;
         }
 
@@ -393,7 +399,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
         this.message = null;
     };
 
-    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache, fullResponse) {
+    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache, fullResponse, onlyLocalError) {
         var method = angular.copy(_method);
         var args = angular.copy(_args);
 
@@ -527,19 +533,19 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
                             });
                         });
 
-                        if(typeof apiConfig.error400 === 'function') {
+                        if(typeof apiConfig.error400 === 'function' && !onlyLocalError) {
                             response.handled = true;
                             apiConfig.error400(response);
                         }
 
                         deferred.reject(response);
                     }
-                    else if(err.status === 401 && typeof apiConfig.error401 === 'function') {
+                    else if(err.status === 401 && typeof apiConfig.error401 === 'function' && !onlyLocalError) {
                         response.handled = true;
                         apiConfig.error401(err.data);
                         deferred.reject(response);
                     }
-                    else if(err.status === 403 && typeof apiConfig.error403 === 'function') {
+                    else if(err.status === 403 && typeof apiConfig.error403 === 'function' && !onlyLocalError) {
                         response.handled = true;
                         response.message = err.data.message;
                         apiConfig.error403(err.data);
