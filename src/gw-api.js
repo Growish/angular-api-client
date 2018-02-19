@@ -455,8 +455,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
             data = new FormData();
             for (var property in body) {
                 if (body.hasOwnProperty(property)) {
-                    if (body[property] && body[property].constructor.name === "File") {
-                        data.append(property, body[property]);
+                    if (body[property] && _body[property] && _body[property].constructor.name === "File") {
+                        data.append(property, _body[property]);
                     } else if (typeof body[property] !== 'undefined') {
                         data.append(property, body[property]);
                     }
