@@ -16,7 +16,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
         baseUrl: devBaseUrl,
         preserveUserSession: true,
         localStorageFile: 'gw-api-data',
-        useCookies: false
+        useCookies: false,
+        language: 'it'
     };
 
 
@@ -440,6 +441,10 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
 
         var headers = [];
+
+        if(apiConfig.language !== 'it')
+            headers['X-Language'] = apiConfig.language;
+
         headers['Content-Type'] = 'application/x-www-form-urlencoded';
         var data = null;
 
@@ -497,6 +502,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
             httpOptions.cache = true;
             debugMsg('Caching ' + httpOptions.url);
         }
+
+
 
         debugMsg(httpOptions);
         $http(httpOptions)
@@ -563,6 +570,10 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
     var dropSession = function () {
         session = null;
         apiStorage.remove();
+    };
+
+    this.language = function (lang) {
+        apiConfig.language = lang;
     };
 
     this.updateSession = function (user) {
