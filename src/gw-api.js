@@ -300,7 +300,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('weddingPremiumProducts', '/premium-products/');
 
-    methods.add('premiumProductSold', '/premium-product-sold/');
+    methods.add('premiumProductSold', '/premium-product-sold/{0}/');
 
     methods.add('table', '/list/{0}/table/');
 
