@@ -1,5 +1,8 @@
 app.controller('demoController', function ($scope, gwApi) {
 
+    //for console testing
+    window.gwApi = gwApi;
+
     $scope.loader = false;
     $scope.session = {};
 

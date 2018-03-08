@@ -78,6 +78,22 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
         return apiConfig.baseUrl;
     };
 
+    this.getFullUrl = function (methodName, args, urlParams) {
+        var method = methods.find(methodName);
+        return this.getBaseUrl() + method.getEndPoint(args, urlParams);
+    };
+
+    this.getAuthenticationHeaders = function () {
+
+        var response = [];
+
+        response['X-App-Key'] = apiConfig.appKey;
+        response['X-Auth-Token'] = session.token;
+
+        return response;
+
+    };
+
     var MethodCollection = function () {
 
         var data = [];
