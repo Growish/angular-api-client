@@ -84,14 +84,10 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
     };
 
     this.getAuthenticationHeaders = function () {
-
-        var response = [];
-
-        response['X-App-Key'] = apiConfig.appKey;
-        response['X-Auth-Token'] = session.token;
-
-        return response;
-
+        return {
+            'X-App-Key': apiConfig.appKey,
+            'X-Auth-Token': session.token
+        };
     };
 
     var MethodCollection = function () {
