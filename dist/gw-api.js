@@ -1,4 +1,4 @@
-// Compiled Tue Mar 06 2018 15:23:05 GMT+0100 (CET)
+// Compiled Thu Mar 08 2018 11:14:10 GMT+0100 (CET)
 !function(a,b){"use strict";function c(a,c,d){function g(a,d,f){var g,h;f=f||{},h=f.expires,g=b.isDefined(f.path)?f.path:e,b.isUndefined(d)&&(h="Thu, 01 Jan 1970 00:00:00 GMT",d=""),b.isString(h)&&(h=new Date(h));var i=encodeURIComponent(a)+"="+encodeURIComponent(d);i+=g?";path="+g:"",i+=f.domain?";domain="+f.domain:"",i+=h?";expires="+h.toUTCString():"",i+=f.secure?";secure":"";var j=i.length+1;return j>4096&&c.warn("Cookie '"+a+"' possibly not set or overflowed because it was too large ("+j+" > 4096 bytes)!"),i}var e=d.baseHref(),f=a[0];return function(a,b,c){f.cookie=g(a,b,c)}}b.module("ngCookies",["ng"]).provider("$cookies",[function(){function d(a){return a?b.extend({},c,a):c}var c=this.defaults={};this.$get=["$$cookieReader","$$cookieWriter",function(a,c){return{get:function(b){return a()[b]},getObject:function(a){var c=this.get(a);return c?b.fromJson(c):c},getAll:function(){return a()},put:function(a,b,e){c(a,b,d(e))},putObject:function(a,c,d){this.put(a,b.toJson(c),d)},remove:function(a,b){c(a,void 0,d(b))}}}]}]),b.module("ngCookies").factory("$cookieStore",["$cookies",function(a){return{get:function(b){return a.getObject(b)},put:function(b,c){a.putObject(b,c)},remove:function(b){a.remove(b)}}}]),c.$inject=["$document","$log","$browser"],b.module("ngCookies").provider("$$cookieWriter",function(){this.$get=c})}(window,window.angular);
 angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', '$cookies', '$location', 'gwApiHelper', function ( $q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory, $cookies, $location, gwApiHelper) {
 
@@ -360,6 +360,12 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$
 
     methods.add('quizQuestionPosition', '/quiz-question-position/{0}/');
 
+    //legacy method, use userImageUpload instead
+    methods.add('chatImageUpload', '/list/{0}/chat-image-upload/');
+
+    methods.add('userImageUpload', '/list/{0}/chat-image-upload/');
+
+
     var RequestClass = function (method, args) {
 
         var me = this;
@@ -367,19 +373,19 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$
         var onlyLocalError = false;
 
         this.read = function (urlParams, cache) {
-            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse, onlyLocalError);
+            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse, onlyLocalError, null);
         };
 
-        this.save = function (body) {
-            return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse, onlyLocalError);
+        this.save = function (body, progressHandler) {
+            return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse, onlyLocalError, progressHandler || null);
         };
 
         this.update = function (body) {
-            return new ServerCallPromise(method, args, body, 'PUT', null, null, fullResponse, onlyLocalError);
+            return new ServerCallPromise(method, args, body, 'PUT', null, null, fullResponse, onlyLocalError, null);
         };
 
         this.delete = function () {
-            return new ServerCallPromise(method, args, null, 'DELETE', null, null, fullResponse, onlyLocalError);
+            return new ServerCallPromise(method, args, null, 'DELETE', null, null, fullResponse, onlyLocalError, null);
         };
 
         this.setFullResponse = function () {
@@ -402,7 +408,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$
         this.message = null;
     };
 
-    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache, fullResponse, onlyLocalError) {
+    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache, fullResponse, onlyLocalError, progressHandler) {
         var method = angular.copy(_method);
         var args = angular.copy(_args);
 
@@ -505,7 +511,12 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$
             debugMsg('Caching ' + httpOptions.url);
         }
 
+        if(typeof progressHandler === 'function') {
 
+            httpOptions.uploadEventHandlers = {
+                progress: progressHandler
+            }
+        }
 
         debugMsg(httpOptions);
         $http(httpOptions)

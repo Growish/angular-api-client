@@ -203,10 +203,18 @@ app.controller('demoController', function ($scope, gwApi) {
 
     };
 
+    function progressHandler(e) {
+        if (e.lengthComputable) {
+            $scope.progressBar = (e.loaded / e.total) * 100;
+            $scope.progressCounter = $scope.progressBar;
+        }
+    }
 
     $scope.getFile = function (i) {
+
         $scope.loader = true;
-        gwApi.request('setImageUser', $scope.session.id).save(i).then(
+
+        gwApi.request('setImageUser', $scope.session.id).save(i, progressHandler).then(
             function success() {
                 $scope.session.imageUrl += "?rand="+ moment().format('X');
                 $scope.loader = false;
@@ -216,6 +224,7 @@ app.controller('demoController', function ($scope, gwApi) {
                 $scope.loader = false;
             }
         );
+
     };
 
     $scope.getNotifications = function (project) {

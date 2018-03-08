@@ -118,6 +118,7 @@
     <div class="block">
         <h4>Set image user</h4>
         <img src="{{session.imageUrl}}" alt="">
+        <progress id="progress" max="100" value="{{progressBar}}"></progress>{{progressCounter}}%
         <input type="file" ng-file-select="onFileSelect($files)"/>
     </div>
 

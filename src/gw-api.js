@@ -358,6 +358,12 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('quizQuestionPosition', '/quiz-question-position/{0}/');
 
+    //legacy method, use userImageUpload instead
+    methods.add('chatImageUpload', '/list/{0}/chat-image-upload/');
+
+    methods.add('userImageUpload', '/list/{0}/chat-image-upload/');
+
+
     var RequestClass = function (method, args) {
 
         var me = this;
@@ -365,19 +371,19 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
         var onlyLocalError = false;
 
         this.read = function (urlParams, cache) {
-            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse, onlyLocalError);
+            return new ServerCallPromise(method, args, null, 'GET', urlParams, cache, fullResponse, onlyLocalError, null);
         };
 
-        this.save = function (body) {
-            return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse, onlyLocalError);
+        this.save = function (body, progressHandler) {
+            return new ServerCallPromise(method, args, body, 'POST', null, null, fullResponse, onlyLocalError, progressHandler || null);
         };
 
         this.update = function (body) {
-            return new ServerCallPromise(method, args, body, 'PUT', null, null, fullResponse, onlyLocalError);
+            return new ServerCallPromise(method, args, body, 'PUT', null, null, fullResponse, onlyLocalError, null);
         };
 
         this.delete = function () {
-            return new ServerCallPromise(method, args, null, 'DELETE', null, null, fullResponse, onlyLocalError);
+            return new ServerCallPromise(method, args, null, 'DELETE', null, null, fullResponse, onlyLocalError, null);
         };
 
         this.setFullResponse = function () {
@@ -400,7 +406,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
         this.message = null;
     };
 
-    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache, fullResponse, onlyLocalError) {
+    var ServerCallPromise = function (_method, _args, _body, verb, _urlParams, cache, fullResponse, onlyLocalError, progressHandler) {
         var method = angular.copy(_method);
         var args = angular.copy(_args);
 
@@ -503,7 +509,12 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
             debugMsg('Caching ' + httpOptions.url);
         }
 
+        if(typeof progressHandler === 'function') {
 
+            httpOptions.uploadEventHandlers = {
+                progress: progressHandler
+            }
+        }
 
         debugMsg(httpOptions);
         $http(httpOptions)
