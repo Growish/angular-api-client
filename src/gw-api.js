@@ -377,6 +377,11 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('sendMoneyBusiness', '/transfer-business/');
 
+    methods.add('userBusinessCoupon', '/business-coupon/');
+
+    methods.add('businessCoupon', '/business/coupon/{0}');
+
+    methods.add('buyBusinessCoupon', '/buy-business-coupon/');
 
     var RequestClass = function (method, args) {
 
