@@ -363,6 +363,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('userImageUpload', '/list/{0}/chat-image-upload/');
 
+    methods.add('sendMoneyBusiness', '/transfer-business/');
+
 
     var RequestClass = function (method, args) {
 
