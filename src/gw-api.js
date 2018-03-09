@@ -467,9 +467,10 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
         var headers = [];
 
-        headers['X-Requested-With'] = 'XmlHttpRequest';
+        headers['Cache-control'] = 'no-store';
         headers['Cache-Control'] = 'no-cache';
-        headers['Expires'] = '-1';
+        headers['Pragma'] = 'no-cache';
+        headers['Expires'] = '0';
 
         if(apiConfig.language !== 'it')
             headers['X-Language'] = apiConfig.language;
