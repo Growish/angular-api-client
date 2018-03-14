@@ -373,7 +373,9 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
     //legacy method, use userImageUpload instead
     methods.add('chatImageUpload', '/list/{0}/chat-image-upload/');
 
-    methods.add('userImageUpload', '/list/{0}/chat-image-upload/');
+    methods.add('userImageUpload', '/wallet/{0}/user-image-upload/');
+
+    methods.add('updateUserImageUpload', '/wallet/{0}/user-image-upload/{1}/');
 
     methods.add('sendMoneyBusiness', '/transfer-business/');
 
