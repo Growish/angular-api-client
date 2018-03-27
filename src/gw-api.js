@@ -674,7 +674,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
             if (_session && _session.id) {
                 session = _session;
-                me.request('user', session.id).read().then(
+                me.request('user', session.id).onlyLocalError().read().then(
                     function success() {
                         debugMsg('Session found in local storage and validated in API');
                         deferred.resolve(session);
