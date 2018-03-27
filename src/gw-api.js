@@ -385,6 +385,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('buyBusinessCoupon', '/buy-business-coupon/');
 
+    methods.add('newGenericList', '/generic-list/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
