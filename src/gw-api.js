@@ -391,6 +391,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('deleteListWallpaper', '/image/{0}/');
 
+    methods.add('adminGreeting', '/admin-greeting/{0}/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
