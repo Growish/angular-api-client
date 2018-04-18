@@ -389,7 +389,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('changePurchaseProduct', '/change-purchase-product/{0}/');
 
-    methods.add('deleteListWallpaper', '/image/{0}');
+    methods.add('deleteListWallpaper', '/image/{0}/');
 
     var RequestClass = function (method, args) {
 
