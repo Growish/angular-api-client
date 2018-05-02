@@ -393,6 +393,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('adminGreeting', '/admin-greeting/{0}/');
 
+    methods.add('buyDirectPremiumProduct', '/buy-direct-premium-product/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
