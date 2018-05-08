@@ -395,6 +395,10 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('buyDirectPremiumProduct', '/buy-direct-premium-product/');
 
+    methods.add('buyLnoPlan', '/buy-lno-plan/');
+
+
+
     var RequestClass = function (method, args) {
 
         var me = this;
