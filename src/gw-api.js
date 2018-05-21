@@ -397,7 +397,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('buyLnoPlan', '/buy-lno-plan/');
 
-    methods.add('userAgencyProduct', ' /user-agencyproduct/{0}/');
+    methods.add('userAgencyProduct', '/user-agencyproduct/{0}/');
 
 
 
