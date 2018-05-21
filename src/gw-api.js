@@ -399,7 +399,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('userAgencyProduct', '/user-agencyproduct/{0}/');
 
-
+    methods.add('userAgencyProductImage', '/user-agencyproductimage/{0}/');
 
     var RequestClass = function (method, args) {
 
