@@ -401,6 +401,10 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('userAgencyProductImage', '/user-agencyproductimage/{0}/');
 
+    methods.add('userAgencyProductImage.delete', '/user-agencyproductimage/{0}/{1}/');
+
+    methods.add('userAgencyproductQuote', '/user-agencyproductquote/{0}/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
