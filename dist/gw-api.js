@@ -1,4 +1,4 @@
-// Compiled Wed May 30 2018 10:40:37 GMT+0200 (CEST)
+// Compiled Wed May 30 2018 17:17:11 GMT+0200 (CEST)
 !function(a,b){"use strict";function c(a,c,d){function g(a,d,f){var g,h;f=f||{},h=f.expires,g=b.isDefined(f.path)?f.path:e,b.isUndefined(d)&&(h="Thu, 01 Jan 1970 00:00:00 GMT",d=""),b.isString(h)&&(h=new Date(h));var i=encodeURIComponent(a)+"="+encodeURIComponent(d);i+=g?";path="+g:"",i+=f.domain?";domain="+f.domain:"",i+=h?";expires="+h.toUTCString():"",i+=f.secure?";secure":"";var j=i.length+1;return j>4096&&c.warn("Cookie '"+a+"' possibly not set or overflowed because it was too large ("+j+" > 4096 bytes)!"),i}var e=d.baseHref(),f=a[0];return function(a,b,c){f.cookie=g(a,b,c)}}b.module("ngCookies",["ng"]).provider("$cookies",[function(){function d(a){return a?b.extend({},c,a):c}var c=this.defaults={};this.$get=["$$cookieReader","$$cookieWriter",function(a,c){return{get:function(b){return a()[b]},getObject:function(a){var c=this.get(a);return c?b.fromJson(c):c},getAll:function(){return a()},put:function(a,b,e){c(a,b,d(e))},putObject:function(a,c,d){this.put(a,b.toJson(c),d)},remove:function(a,b){c(a,void 0,d(b))}}}]}]),b.module("ngCookies").factory("$cookieStore",["$cookies",function(a){return{get:function(b){return a.getObject(b)},put:function(b,c){a.putObject(b,c)},remove:function(b){a.remove(b)}}}]),c.$inject=["$document","$log","$browser"],b.module("ngCookies").provider("$$cookieWriter",function(){this.$get=c})}(window,window.angular);
 angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$timeout', '$httpParamSerializerJQLike', '$cacheFactory', '$cookies', '$location', 'gwApiHelper', function ( $q, $http, $timeout, $httpParamSerializerJQLike, $cacheFactory, $cookies, $location, gwApiHelper) {
 
@@ -408,6 +408,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', ['$q', '$http', '$
     methods.add('userAgencyproductQuote', '/user-agencyproductquote/{0}/');
 
     methods.add('posContribution', '/pos-contribution/');
+
+    methods.add('merchantUserWallet', '/merchant-user-wallet/');
 
     var RequestClass = function (method, args) {
 
