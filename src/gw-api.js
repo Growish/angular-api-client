@@ -405,6 +405,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('userAgencyproductQuote', '/user-agencyproductquote/{0}/');
 
+    methods.add('posContribution', '/pos-contribution/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
