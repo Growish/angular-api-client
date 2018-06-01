@@ -411,7 +411,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('merchantActivateUserWallet', '/merchant-activate-user-wallet/');
 
-    methods.add('merchantUserListWallet', ' /merchant-user-listwallet/');
+    methods.add('merchantUserListWallet', '/merchant-user-listwallet/');
 
     methods.add('merchantUserGenericListWallet', '/merchant-user-genericlistwallet/');
 
