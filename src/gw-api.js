@@ -407,6 +407,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('posContribution', '/pos-contribution/');
 
+    methods.add('posContribution.reference', '/pos-contribution/{0}/');
+
     methods.add('merchantUserWallet', '/merchant-user-wallet/');
 
     methods.add('merchantActivateUserWallet', '/merchant-activate-user-wallet/');
