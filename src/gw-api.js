@@ -417,6 +417,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('merchantUserGenericListWallet', '/merchant-user-genericlistwallet/');
 
+    methods.add('pidAuth', '/pid-auth/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
