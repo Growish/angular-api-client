@@ -429,6 +429,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('saasMerchant', '/saas-merchant/');
 
+    methods.add('userAgencyKycActivation', '/user-agency-kyc-activation/{0}/');
+
     var RequestClass = function (method, args) {
 
         var me = this;
