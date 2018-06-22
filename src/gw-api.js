@@ -431,6 +431,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('userAgencyKycActivation', '/user-agency-kyc-activation/{0}/');
 
+    methods.add('userAgencyKyc', '/user-agency-kyc-activation/');
+
     methods.add('acceptContract', '/accept-contract/{0}/');
 
     var RequestClass = function (method, args) {
