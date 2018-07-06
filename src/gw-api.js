@@ -437,6 +437,11 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('weddingPremiumProduct', '/premium-products/{0}/');
 
+    methods.add('newCardRegistration', '/card-registration/');
+
+    methods.add('modifyCardRegistration', '/card-registration/{0}/');
+
+
     var RequestClass = function (method, args) {
 
         var me = this;
