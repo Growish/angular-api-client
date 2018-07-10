@@ -443,6 +443,8 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('getCards', '/card/');
 
+    methods.add('getUserAllWallet', '/user-all-wallet/');
+
 
     var RequestClass = function (method, args) {
 
