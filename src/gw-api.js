@@ -447,6 +447,9 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
 
     methods.add('transferUserWallet', '/transfer-user-wallet/');
 
+    methods.add('transferPayment', '/transfer-payment/');
+
+
 
     var RequestClass = function (method, args) {
 
