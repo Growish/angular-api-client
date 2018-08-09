@@ -5,6 +5,8 @@
     "domingo <domingo.lupo@growish.com>"
   ],
   "description": "The Growish API Angular client",
-  "main": "",
+  "main": [
+    "dist/gw-api.min.js"
+  ],
   "license": "MIT"
 }
