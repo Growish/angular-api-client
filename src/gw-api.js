@@ -9,11 +9,15 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
     var devBaseUrl = 'https://apidev.growish.com/v1';
     var prodBaseUrl = 'https://api.growish.com/v1';
 
+    var devSocketServerUrl = '127.0.0.1:4415';
+    var prodSocketServerUrl = 'https://webpayments.growish.com';
+
     var session;
 
     var defaults = {
         env: 'developing',
         baseUrl: devBaseUrl,
+        socketServerUrl: devSocketServerUrl,
         preserveUserSession: true,
         localStorageFile: 'gw-api-data',
         useCookies: false,
@@ -86,7 +90,7 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
     this.getAuthenticationHeaders = function () {
         return {
             'X-App-Key': apiConfig.appKey,
-            'X-Auth-Token': session.token
+            'X-Auth-Token': session ? session.token : ""
         };
     };
 
@@ -785,8 +789,11 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
     };
 
     this.initialize = function (options) {
-        if (typeof options.baseUrl === 'undefined' && typeof options.env !== 'undefined' && options.env === 'production')
+
+        if (typeof options.baseUrl === 'undefined' && typeof options.env !== 'undefined' && options.env === 'production') {
             options.baseUrl = prodBaseUrl;
+            options.socketServerUrl = prodSocketServerUrl;
+        }
 
         angular.extend(apiConfig, defaults, options);
         initialized = true;
@@ -828,6 +835,106 @@ angular.module('gwApiClient', ['ngCookies']).service('gwApi', function ( $q, $ht
         }
 
         return new RequestClass(method, payload);
+
+    };
+
+    var socket;
+
+    function connectToSocketApi() {
+        var deferred = $q.defer();
+
+        debugMsg("Connecting to socket server");
+        socket = io(apiConfig.socketServerUrl, {
+            'reconnection': false
+        });
+
+        socket.on('connect', function() {
+            debugMsg("Connected to socket server");
+            deferred.resolve();
+        });
+
+        socket.on('connect_error', function() {
+            debugMsg("Error while connecting to socket server");
+            deferred.reject({ message: "Il server di pagamenti non è raggiungibile in questo momento, si prega di riprovare più tardi." });
+        });
+
+        return deferred.promise;
+    }
+
+
+    function processIoRequest(cmd, payload, deferred) {
+
+        var messageId = "p" + String(Math.round(Math.random()*10000)) + String(new Date().getTime());
+
+        debugMsg("Setting listener", {messageId: messageId});
+
+        socket.once(messageId, function (data) {
+
+            debugMsg("Processing listener", {messageId: messageId});
+
+            if(data.code === 200)
+                deferred.resolve(data);
+            else
+                deferred.reject(data);
+        });
+
+        debugMsg("Emiting socket message", { cmd: cmd, messageId: messageId});
+        socket.emit('message', { cmd: cmd, payload: payload, messageId: messageId, auth: me.getAuthenticationHeaders() });
+
+    }
+    
+    this.ioRequest = function (cmd, payload) {
+
+        var deferred = $q.defer();
+
+        if(typeof io === 'undefined') {
+            debugMsg('You need to load socket.io library');
+            deferred.reject();
+            return deferred.promise;
+        }
+
+        if(!socket || !socket.connected)
+            connectToSocketApi().then(
+                function success() {
+                    processIoRequest(cmd, payload, deferred);
+                },
+                function error(err) {
+                    deferred.reject(err);
+                }
+                );
+        else
+            processIoRequest(cmd, payload, deferred);
+        
+        return deferred.promise;
+
+    };
+
+    this.ioQuestionHandler = function (userFunc) {
+
+        if(typeof userFunc !== 'function')
+            return debugMsg('A handler function must be defined');
+
+        if(typeof socket === 'undefined')
+            return debugMsg('There is no socket connection');
+
+
+        socket.on('question', function (data) {
+
+            userFunc({
+                id: data.id,
+                text: data.text,
+                options: data.options
+            }, {
+                send: function (value) {
+                    debugMsg('Sending response to socker server', { id: data.id, value: value });
+                    socket.emit(data.id, value);
+                },
+                cancel: function () {
+                    socket.emit(data.id, null);
+                }
+            });
+
+        })
 
     };
 
