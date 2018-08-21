@@ -916,6 +916,16 @@ angular.module('gwApiClient', ['ngCookies'])
 
         };
 
+        this.ioOnDisconnect = function (userFunc) {
+            if (typeof userFunc !== 'function')
+                return debugMsg('A handler function must be defined');
+
+            if (typeof socket === 'undefined')
+                return debugMsg('There is no socket connection');
+
+            socket.on("disconnect", userFunc);
+        };
+
         this.ioQuestionHandler = function (userFunc) {
 
             if (typeof userFunc !== 'function')
