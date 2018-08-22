@@ -955,6 +955,21 @@ angular.module('gwApiClient', ['ngCookies'])
 
         };
 
+        this.ioNotificationHandler = function (userFunc) {
+
+            if (typeof userFunc !== 'function')
+                return debugMsg('A handler function must be defined');
+
+            if (typeof socket === 'undefined')
+                return debugMsg('There is no socket connection');
+
+
+            socket.on('notification', function (data) {
+                userFunc(data);
+            })
+
+        };
+
         this.authenticate = function (email, password) {
             return me.request('auth').save({email: email, password: password});
         };
