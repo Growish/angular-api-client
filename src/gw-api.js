@@ -11,7 +11,7 @@ angular.module('gwApiClient', ['ngCookies'])
         var devBaseUrl = 'https://apidev.growish.com/v1';
         var prodBaseUrl = 'https://api.growish.com/v1';
 
-        var devSocketServerUrl = '127.0.0.1:4415';
+        var devSocketServerUrl = 'https://webpaymentsdev.growish.com';
         var prodSocketServerUrl = 'https://webpayments.growish.com';
 
         var session;
