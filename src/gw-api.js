@@ -926,16 +926,21 @@ angular.module('gwApiClient', ['ngCookies'])
             socket.on("disconnect", userFunc);
         };
 
-        this.ioQuestionHandler = function (userFunc) {
+        this.ioQuestionHandler = function (userFunc, timeoutFunc) {
 
             if (typeof userFunc !== 'function')
                 return debugMsg('A handler function must be defined');
+
+            if (typeof timeoutFunc !== 'function')
+                return debugMsg('A timeout handler function must be defined');
 
             if (typeof socket === 'undefined')
                 return debugMsg('There is no socket connection');
 
 
             socket.on('question', function (data) {
+
+                socket.once('timeout-' + data.id, timeoutFunc);
 
                 userFunc({
                     id: data.id,
@@ -944,9 +949,12 @@ angular.module('gwApiClient', ['ngCookies'])
                 }, {
                     send: function (value) {
                         debugMsg('Sending response to socker server', {id: data.id, value: value});
+                        socket.off('timeout-' + data.id);
                         socket.emit(data.id, value);
                     },
                     cancel: function () {
+                        debugMsg('Sending response to socker server (Cancel Action)', {id: data.id, value: null});
+                        socket.off('timeout-' + data.id);
                         socket.emit(data.id, null);
                     }
                 });
