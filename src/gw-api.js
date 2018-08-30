@@ -460,6 +460,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('cardPayment', '/card-payment/');
 
+        methods.add('premiumProductContributor', '/premium-product-contributor/');
+
 
         var RequestClass = function (method, args) {
 
