@@ -978,6 +978,10 @@ angular.module('gwApiClient', ['ngCookies'])
 
         };
 
+        this.getLastSession = function () {
+            return apiStorage.get();
+        };
+
         this.authenticate = function (email, password) {
             return me.request('auth').save({email: email, password: password});
         };
