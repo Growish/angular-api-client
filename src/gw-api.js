@@ -464,6 +464,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('cashbackWallet', '/cashbackwallet/{0}/');
 
+        methods.add('cashbackWalletStatement', '/cashbackwallet-statement/{0}/');
+
 
         var RequestClass = function (method, args) {
 
