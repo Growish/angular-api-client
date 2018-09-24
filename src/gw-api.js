@@ -468,6 +468,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('updateGuest', '/list/{0}/guest/{1}/');
 
+        methods.add('deleteComment', '/product/{0}/comment/{1}/');
+
 
         var RequestClass = function (method, args) {
 
