@@ -470,6 +470,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('deleteComment', '/product/{0}/comment/{1}/');
 
+        methods.add('printGreeting', '/print-greeting/');
+
 
         var RequestClass = function (method, args) {
 
