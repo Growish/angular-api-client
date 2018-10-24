@@ -474,6 +474,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('transferDeposit', '/transfer-deposit/');
 
+        methods.add('transferPromise', '/transferpromise/');
+
 
         var RequestClass = function (method, args) {
 
