@@ -655,7 +655,9 @@ angular.module('gwApiClient', ['ngCookies'])
                     function error(err) {
 
                         var response = new ErrorResponseClass();
+
                         response.code = err.status;
+                        response.message = err.data.message || null;
 
                         if (err.status === 400) {
 
@@ -681,7 +683,6 @@ angular.module('gwApiClient', ['ngCookies'])
                         }
                         else if (err.status === 403 && typeof apiConfig.error403 === 'function' && !onlyLocalError) {
                             response.handled = true;
-                            response.message = err.data.message;
                             apiConfig.error403(err.data);
                             deferred.reject(response);
                         }
