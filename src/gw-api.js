@@ -472,6 +472,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('printGreeting', '/print-greeting/');
 
+        methods.add('transferDeposit', '/transfer-deposit/');
+
 
         var RequestClass = function (method, args) {
 
