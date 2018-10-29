@@ -480,6 +480,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('sepaDirectDebit', '/sepa-direct-debit/');
 
+        methods.add('mobilePayment', '/mobile-payment/{0}/');
+
 
         var RequestClass = function (method, args) {
 
