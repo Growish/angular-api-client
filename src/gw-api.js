@@ -476,6 +476,10 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('transferPromise', '/transferpromise/');
 
+        methods.add('bankMandate', '/bank-mandate/');
+
+        methods.add('sepaDirectDebit', '/sepa-direct-debit/');
+
 
         var RequestClass = function (method, args) {
 
