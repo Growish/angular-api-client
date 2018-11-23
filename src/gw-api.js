@@ -482,6 +482,10 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('mobilePay', '/mobilepayment/{0}/');
 
+        methods.add('getGiftcard', '/giftcardwallet/{0}/');
+
+        methods.add('newGiftcard"', '/merchant-user-giftcardwallet/');
+
 
         var RequestClass = function (method, args) {
 
