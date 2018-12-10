@@ -492,6 +492,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('paymentMethod', '/payment-method/');
 
+        methods.add('pdfWalletComments', '/wallet/{0}/pdf-wallet-comment/');
+
 
         var RequestClass = function (method, args) {
 
