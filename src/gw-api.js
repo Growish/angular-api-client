@@ -494,6 +494,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('pdfWalletComments', '/wallet/{0}/pdf-comment/');
 
+        methods.add('videoMessageInvite', '/list/{0}/video-message-invite/');
+
 
         var RequestClass = function (method, args) {
 
