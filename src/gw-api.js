@@ -496,6 +496,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('videoMessageInvite', '/list/{0}/video-message-invite/');
 
+        methods.add('videoMessageRead', '/video-message-invite/{0}');
+
 
         var RequestClass = function (method, args) {
 
