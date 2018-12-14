@@ -500,6 +500,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('cancelVideoMessage', '/cancel-video-message/{0}/');
 
+        methods.add('commentGiftCard', ' /giftcard-wallet/{0}/comment/');
+
 
         var RequestClass = function (method, args) {
 
