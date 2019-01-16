@@ -504,6 +504,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('editGiftCard', '/giftcardwallet/{0}/');
 
+        methods.add('pushToken', '/push-token/');
+
 
         var RequestClass = function (method, args) {
 
