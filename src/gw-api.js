@@ -506,6 +506,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('pushToken', '/push-token/');
 
+        methods.add('newGenericList', '/generic-list/');
+
 
         var RequestClass = function (method, args) {
 
