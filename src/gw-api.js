@@ -720,6 +720,10 @@ angular.module('gwApiClient', ['ngCookies'])
                             apiConfig.error403(err.data);
                             deferred.reject(response);
                         }
+                        else if (err.status === 417) {
+                            response.listId = err.data.data.id;
+                            deferred.reject(response);
+                        }
                         else
                             deferred.reject(response);
                     });
