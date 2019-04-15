@@ -508,6 +508,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('searchWallet', '/wallet/');
 
+        methods.add('termCondition', '/term-condition/');
+
 
         var RequestClass = function (method, args) {
 
