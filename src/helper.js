@@ -29,7 +29,7 @@ angular.module('gwApiClient').service('gwApiHelper', function ($location) {
         var result = parts.join('.');
 
         if(parts.length > 2)
-            return result;
+            return null;
 
         return "." + result;
     };

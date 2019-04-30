@@ -31,13 +31,14 @@ angular.module('gwApiClient', ['ngCookies'])
 
         var ApiStorageClass = function () {
 
+
+            var cookieDomain = gwApiHelper.getCookieDomain();
+
             var cookieOptions = {
-                path: '/',
-                domain: gwApiHelper.getCookieDomain()
+                path: '/'
             };
 
-            console.log(cookieOptions);
-            window.foo = $cookies;
+            if(cookieDomain) cookieOptions.domain = cookieDomain;
 
             this.save = function (value) {
                 if (!apiConfig.useCookies)
