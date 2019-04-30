@@ -1,4 +1,4 @@
-// Compiled Mon Apr 15 2019 15:06:21 GMT+0200 (Central European Summer Time)
+// Compiled Tue Apr 30 2019 13:19:27 GMT+0200 (CEST)
 !function(a,b){"use strict";function c(a,c,d){function g(a,d,f){var g,h;f=f||{},h=f.expires,g=b.isDefined(f.path)?f.path:e,b.isUndefined(d)&&(h="Thu, 01 Jan 1970 00:00:00 GMT",d=""),b.isString(h)&&(h=new Date(h));var i=encodeURIComponent(a)+"="+encodeURIComponent(d);i+=g?";path="+g:"",i+=f.domain?";domain="+f.domain:"",i+=h?";expires="+h.toUTCString():"",i+=f.secure?";secure":"";var j=i.length+1;return j>4096&&c.warn("Cookie '"+a+"' possibly not set or overflowed because it was too large ("+j+" > 4096 bytes)!"),i}var e=d.baseHref(),f=a[0];return function(a,b,c){f.cookie=g(a,b,c)}}b.module("ngCookies",["ng"]).provider("$cookies",[function(){function d(a){return a?b.extend({},c,a):c}var c=this.defaults={};this.$get=["$$cookieReader","$$cookieWriter",function(a,c){return{get:function(b){return a()[b]},getObject:function(a){var c=this.get(a);return c?b.fromJson(c):c},getAll:function(){return a()},put:function(a,b,e){c(a,b,d(e))},putObject:function(a,c,d){this.put(a,b.toJson(c),d)},remove:function(a,b){c(a,void 0,d(b))}}}]}]),b.module("ngCookies").factory("$cookieStore",["$cookies",function(a){return{get:function(b){return a.getObject(b)},put:function(b,c){a.putObject(b,c)},remove:function(b){a.remove(b)}}}]),c.$inject=["$document","$log","$browser"],b.module("ngCookies").provider("$$cookieWriter",function(){this.$get=c})}(window,window.angular);
 angular.module('gwApiClient', ['ngCookies'])
 
@@ -35,7 +35,7 @@ angular.module('gwApiClient', ['ngCookies'])
 
             var cookieOptions = {
                 path: '/',
-                domain: gwApiHelper.isIp($location.host()) ? $location.host() : "." + gwApiHelper.removeSubdomain($location.host())
+                domain: gwApiHelper.getCookieDomain()
             };
 
             this.save = function (value) {
@@ -1136,16 +1136,22 @@ angular.module('gwApiClient', ['ngCookies'])
             this.initialize(gwApiConfig.get());
 
     }]);
-angular.module('gwApiClient').service('gwApiHelper', function () {
+angular.module('gwApiClient').service('gwApiHelper', ['$location', function ($location) {
 
     var firstTLDs  = "ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|be|bf|bg|bh|bi|bj|bm|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|cl|cm|cn|co|cr|cu|cv|cw|cx|cz|de|dj|dk|dm|do|dz|ec|ee|eg|es|et|eu|fi|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|im|in|io|iq|ir|is|it|je|jo|jp|kg|ki|km|kn|kp|kr|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mn|mo|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|na|nc|ne|nf|ng|nl|no|nr|nu|nz|om|pa|pe|pf|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|st|su|sv|sx|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|yt".split('|');
     var secondTLDs = "com|edu|gov|net|mil|org|nom|sch|caa|res|off|gob|int|tur|ip6|uri|urn|asn|act|nsw|qld|tas|vic|pro|biz|adm|adv|agr|arq|art|ato|bio|bmd|cim|cng|cnt|ecn|eco|emp|eng|esp|etc|eti|far|fnd|fot|fst|g12|ggf|imb|ind|inf|jor|jus|leg|lel|mat|med|mus|not|ntr|odo|ppg|psc|psi|qsl|rec|slg|srv|teo|tmp|trd|vet|zlg|web|ltd|sld|pol|fin|k12|lib|pri|aip|fie|eun|sci|prd|cci|pvt|mod|idv|rel|sex|gen|nic|abr|bas|cal|cam|emr|fvg|laz|lig|lom|mar|mol|pmn|pug|sar|sic|taa|tos|umb|vao|vda|ven|mie|北海道|和歌山|神奈川|鹿児島|ass|rep|tra|per|ngo|soc|grp|plc|its|air|and|bus|can|ddr|jfk|mad|nrw|nyc|ski|spy|tcm|ulm|usa|war|fhs|vgs|dep|eid|fet|fla|flå|gol|hof|hol|sel|vik|cri|iwi|ing|abo|fam|gok|gon|gop|gos|aid|atm|gsm|sos|elk|waw|est|aca|bar|cpa|jur|law|sec|plo|www|bir|cbg|jar|khv|msk|nov|nsk|ptz|rnd|spb|stv|tom|tsk|udm|vrn|cmw|kms|nkz|snz|pub|fhv|red|ens|nat|rns|rnu|bbs|tel|bel|kep|nhs|dni|fed|isa|nsn|gub|e12|tec|орг|обр|упр|alt|nis|jpn|mex|ath|iki|nid|gda|inc".split('|');
 
-    this.isIp = function (value) {
+    var isIp = function (value) {
         return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(value);
     };
 
-    this.removeSubdomain = function (s) {
+    this.getCookieDomain = function () {
+
+        var s = $location.host();
+
+        if(isIp(s))
+            return s;
+
         s = s.replace(/^www\./, '');
 
         var parts = s.split('.');
@@ -1158,10 +1164,15 @@ angular.module('gwApiClient').service('gwApiHelper', function () {
             parts.shift();
         }
 
-        return parts.join('.');
+        var result = parts.join('.');
+
+        if(parts.length > 2)
+            return result;
+
+        return "." + result;
     };
 
-});
+}]);
 angular.module('gwApiClient').provider('gwApiConfig', function () {
 
     var _options = null;

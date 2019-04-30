@@ -33,7 +33,7 @@ angular.module('gwApiClient', ['ngCookies'])
 
             var cookieOptions = {
                 path: '/',
-                domain: gwApiHelper.isIp($location.host()) ? $location.host() : "." + gwApiHelper.removeSubdomain($location.host())
+                domain: gwApiHelper.getCookieDomain()
             };
 
             this.save = function (value) {
