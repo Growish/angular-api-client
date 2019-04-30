@@ -37,6 +37,7 @@ angular.module('gwApiClient', ['ngCookies'])
             };
 
             console.log(cookieOptions);
+            window.foo = $cookies;
 
             this.save = function (value) {
                 if (!apiConfig.useCookies)

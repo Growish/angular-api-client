@@ -11,16 +11,12 @@ angular.module('gwApiClient').service('gwApiHelper', function ($location) {
 
         var s = $location.host();
 
-        console.log("s", s);
-
         if(isIp(s))
             return s;
 
         s = s.replace(/^www\./, '');
 
         var parts = s.split('.');
-
-        console.log("parts 1", parts);
 
         while (parts.length > 3) {
             parts.shift();
@@ -30,11 +26,7 @@ angular.module('gwApiClient').service('gwApiHelper', function ($location) {
             parts.shift();
         }
 
-        console.log("parts 2", parts);
-
         var result = parts.join('.');
-
-        console.log('result', result);
 
         if(parts.length > 2)
             return result;
