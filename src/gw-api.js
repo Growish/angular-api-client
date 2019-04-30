@@ -36,6 +36,8 @@ angular.module('gwApiClient', ['ngCookies'])
                 domain: gwApiHelper.getCookieDomain()
             };
 
+            console.log(cookieOptions);
+
             this.save = function (value) {
                 if (!apiConfig.useCookies)
                     localStorage.setItem(apiConfig.localStorageFile, value);
