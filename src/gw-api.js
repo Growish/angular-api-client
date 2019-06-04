@@ -514,6 +514,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('termCondition', '/term-condition/');
 
+        methods.add('deleteUserAgencyProductQuote', '/user-agencyproductquote/{0}/{1}/');
+
 
         var RequestClass = function (method, args) {
 
