@@ -516,6 +516,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('deleteUserAgencyProductQuote', '/user-agencyproductquote/{0}/{1}/');
 
+        methods.add('freeMWGiftVoucher', '/freeMWGiftVoucher/{0}/');
+
 
         var RequestClass = function (method, args) {
 
