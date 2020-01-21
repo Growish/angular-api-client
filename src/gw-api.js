@@ -518,6 +518,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('freeMWGiftVoucher', '/freeMWGiftVoucher/{0}/');
 
+        methods.add('replyMessage', '/list/{0}/reply-message/');
+
 
         var RequestClass = function (method, args) {
 
