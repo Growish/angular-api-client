@@ -520,6 +520,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('replyMessage', '/list/{0}/reply-message/');
 
+        methods.add('pdfQuizRank', '/list/{0}/pdf-quiz/');
+
 
         var RequestClass = function (method, args) {
 
