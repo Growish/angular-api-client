@@ -155,6 +155,10 @@ angular.module('gwApiClient', ['ngCookies'])
         var methods = new MethodCollection();
 
 
+        this.addMethod = function(name, endpoint) {
+            return methods.add(name, endpoint);
+        };
+
         //http://growish.github.io/api-doc/#api-Authorization-authorization
         methods.add('auth', '/auth/');
 
