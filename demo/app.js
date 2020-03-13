@@ -7,6 +7,7 @@ var app = angular.module('demo', ['gwApiClient'])
         gwApiConfigProvider.set({
             //appKey: '1234567890',
             appKey: '0987654321',
+            volatileSession: false,
             error401: function () {
                 alert("Token missing or invalid, you should ask the user to login again");
             },

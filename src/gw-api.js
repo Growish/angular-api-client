@@ -20,10 +20,10 @@ angular.module('gwApiClient', ['ngCookies'])
             env: 'developing',
             baseUrl: devBaseUrl,
             socketServerUrl: devSocketServerUrl,
-            preserveUserSession: true,
             localStorageFile: 'gw-api-data',
             useCookies: false,
-            language: 'it'
+            language: 'it',
+            volatileSession: false
         };
 
 
@@ -38,10 +38,14 @@ angular.module('gwApiClient', ['ngCookies'])
                 path: '/'
             };
 
+            var data;
+
             if(cookieDomain) cookieOptions.domain = cookieDomain;
 
             this.save = function (value) {
-                if (!apiConfig.useCookies)
+                if(apiConfig.volatileSession)
+                    data = value;
+                else if (!apiConfig.useCookies)
                     localStorage.setItem(apiConfig.localStorageFile, value);
                 else {
                     var elObj = JSON.parse(value);
@@ -52,7 +56,9 @@ angular.module('gwApiClient', ['ngCookies'])
             };
 
             this.remove = function () {
-                if (!apiConfig.useCookies)
+                if(apiConfig.volatileSession)
+                    data = null;
+                else if (!apiConfig.useCookies)
                     localStorage.removeItem(apiConfig.localStorageFile);
                 else {
 
@@ -64,7 +70,9 @@ angular.module('gwApiClient', ['ngCookies'])
             };
 
             this.get = function () {
-                if (!apiConfig.useCookies)
+                if(apiConfig.volatileSession)
+                    return data;
+                else if (!apiConfig.useCookies)
                     return localStorage.getItem(apiConfig.localStorageFile);
                 else {
 
