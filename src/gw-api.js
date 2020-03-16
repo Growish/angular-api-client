@@ -534,6 +534,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('pdfQuizRank', '/list/{0}/pdf-quiz/');
 
+        methods.add('businessAvailable', '/gwp-business-available/');
+
 
         var RequestClass = function (method, args) {
 
