@@ -536,6 +536,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('businessAvailable', '/gwp-business-available/');
 
+        methods.add('usersOfBusiness', '/gwp-business-user/{0}/');
+
 
         var RequestClass = function (method, args) {
 
