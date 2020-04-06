@@ -542,6 +542,10 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('businessWallet', '/gwp-business-wallet/{0}/');
 
+        methods.add('charityProfile', '/partner/{0}/charity/profile/');
+
+        methods.add('charityDonations', '/partner/{0}/charity/donations/');
+
 
         var RequestClass = function (method, args) {
 
