@@ -1003,6 +1003,15 @@ angular.module('gwApiClient', ['ngCookies'])
 
         };
 
+        this.ioDisconnect = function () {
+
+            if (typeof socket.disconnect !== 'function')
+                return debugMsg('Socket connection is not initialized!');
+
+            socket.disconnect();
+
+        };
+
         this.ioOnDisconnect = function (userFunc) {
             if (typeof userFunc !== 'function')
                 return debugMsg('A handler function must be defined');
