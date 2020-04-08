@@ -540,6 +540,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('transactionsOfBusiness', '/gwp-business-statement/{0}/');
 
+        methods.add('adminContact', '/gwp-admin-contact/');
+
         methods.add('businessWallet', '/gwp-business-wallet/{0}/');
 
         methods.add('charityProfile', '/partner/{0}/charity/profile/');
