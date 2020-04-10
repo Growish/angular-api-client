@@ -548,6 +548,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('charityDonations', '/partner/{0}/charity/donations/');
 
+        methods.add('networkAgencies', '/network-agency/');
+
 
         var RequestClass = function (method, args) {
 
