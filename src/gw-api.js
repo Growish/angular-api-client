@@ -978,6 +978,7 @@ angular.module('gwApiClient', ['ngCookies'])
                 cmd: cmd,
                 payload: payload,
                 messageId: messageId,
+                language: apiConfig.language,
                 auth: me.getAuthenticationHeaders()
             });
 
