@@ -554,6 +554,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('featuredWallet', '/featured-wallet/');
 
+        methods.add('giftCardCheck', '/giftcard-check/');
+
 
         var RequestClass = function (method, args) {
 
