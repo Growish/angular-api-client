@@ -558,6 +558,14 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('getGiftCard', '/giftcard/{0}/');
 
+        methods.add('updateStoryline', '/list/{0}/storyline/{1}/');
+
+        methods.add('createStorylineEvent', '/list/{0}/storyline-event/');
+
+        methods.add('updateStorylineEvent', '/list/{0}/storyline-event/{1}/');
+
+        methods.add('updateImageStorylineEvent', '/list/{0}/storyline-event/{1}/image/');
+
 
         var RequestClass = function (method, args) {
 
