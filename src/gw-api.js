@@ -566,6 +566,14 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('updateImageStorylineEvent', '/list/{0}/storyline-event/{1}/image/');
 
+        methods.add('createProtagonist', '/list/{0}/protagonist/');
+
+        methods.add('updateProtagonist', '/list/{0}/protagonist/{1}/');
+
+        methods.add('updateProtagonistImage', '/list/{0}/protagonist/{1}/image/');
+
+        methods.add('changePositionProtagonist', '/protagonist-position/{0}/');
+
 
         var RequestClass = function (method, args) {
 
