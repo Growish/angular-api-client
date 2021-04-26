@@ -1112,8 +1112,8 @@ angular.module('gwApiClient', ['ngCookies'])
             return apiStorage.get();
         };
 
-        this.authenticate = function (email, password) {
-            return me.request('auth').save({email: email, password: password});
+        this.authenticate = function (email, password, recaptcha=null) {
+            return me.request('auth').save({email: email, password: password, recaptcha: recaptcha});
         };
 
         this.addMapper = function (methodName, mapper) {
