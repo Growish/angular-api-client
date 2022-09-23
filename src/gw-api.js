@@ -574,6 +574,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('changePositionProtagonist', '/protagonist-position/{0}/');
 
+        methods.add('easyGift', '/list/{0}/easygift/ ');
+
 
         var RequestClass = function (method, args) {
 
