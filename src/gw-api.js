@@ -788,6 +788,7 @@ angular.module('gwApiClient', ['ngCookies'])
                         }
                         else if (err.status === 417) {
                             response.listId = err.data.data.id;
+                            response.data = err.data;
                             deferred.reject(response);
                         }
                         else
