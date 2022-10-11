@@ -576,6 +576,10 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('easyGift', '/list/{0}/easygift/ ');
 
+        methods.add('pendingWithdrawalContribution', '/wallet/{0}/pending-withdrawal-contribution/');
+
+        methods.add('associateWithdrawalContribution', '/associate-pending-withdrawal-contribution/');
+
 
         var RequestClass = function (method, args) {
 
