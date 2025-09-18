@@ -580,6 +580,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('associateWithdrawalContribution', '/associate-pending-withdrawal-contribution/');
 
+        methods.add('scaEnrollment', '/sca-enrollment/');
+
 
         var RequestClass = function (method, args) {
 
