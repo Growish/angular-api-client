@@ -582,6 +582,8 @@ angular.module('gwApiClient', ['ngCookies'])
 
         methods.add('scaEnrollment', '/sca-enrollment/');
 
+        methods.add('userLiveness', '/liveness/')
+
 
         var RequestClass = function (method, args) {
 
